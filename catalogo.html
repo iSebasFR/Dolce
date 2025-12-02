@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dolce - Catálogo Completo</title>
+    <meta content="catálogo, postres, tortas, cheesecakes, salados, cuchareables, compartir" name="keywords">
+    <meta content="Catálogo completo de todos nuestros productos artesanales" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        .catalogo-header {
+            background-color: #FEF1EF;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            margin-top: 80px;
+        }
+        
+        .catalogo-title {
+            color: #211E1C;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .catalogo-subtitle {
+            color: #757575;
+            font-size: 1.1rem;
+        }
+        
+        /* Sidebar para desktop */
+        .catalogo-sidebar {
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            color: #211E1C;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F9A392;
+        }
+        
+        .categoria-item {
+            display: block;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            color: #757575;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .categoria-item:hover,
+        .categoria-item.active {
+            background-color: #FEF1EF;
+            color: #211E1C;
+            transform: translateX(5px);
+        }
+        
+        .categoria-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Botón para móvil */
+        .btn-filtrar-movil {
+            display: none;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        /* Product cards */
+        .producto-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+            border: 1px solid #FEF1EF;
+            margin-bottom: 25px;
+        }
+        
+        .producto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+        
+        .producto-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #F9A392;
+            color: white;
+            z-index: 1;
+        }
+        
+        .producto-img {
+            height: 220px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+        }
+        
+        .producto-categoria {
+            font-size: 0.85rem;
+            color: #F9A392;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        /* Sidebar móvil */
+        .sidebar-movil {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1050;
+            padding: 20px;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-movil.active {
+            left: 0;
+        }
+        
+        .sidebar-movil-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #FEF1EF;
+        }
+        
+        .sidebar-movil-title {
+            color: #211E1C;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .overlay-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1040;
+            display: none;
+        }
+        
+        .overlay-sidebar.active {
+            display: block;
+        }
+        
+        /* Estilos para el modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: #FEF1EF;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .opcion-item {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .opcion-item:hover {
+            border-color: #F9A392;
+            background-color: #FEF1EF;
+        }
+        
+        .opcion-item.selected {
+            border-color: #F9A392;
+            background-color: #FEF1EF;
+        }
+        
+        .opcion-titulo {
+            font-weight: 600;
+            color: #211E1C;
+            margin-bottom: 5px;
+        }
+        
+        .opcion-precio {
+            color: #F9A392;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Carrito flotante */
+        .carrito-flotante {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .carrito-icono {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            background: #F9A392;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(249, 163, 146, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .carrito-icono:hover {
+            transform: scale(1.1);
+        }
+        
+        .carrito-contador {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #211E1C;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .btn-filtrar-movil {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .catalogo-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .catalogo-header {
+                padding: 30px 0;
+                margin-top: 70px;
+            }
+            
+            .catalogo-title {
+                font-size: 2rem;
+            }
+        }
+
+        .producto-card .text-primary {
+            font-size: 0.8rem !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light d-none d-lg-block">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-primary"><span class="text-dark">Postres</span> D'Katherine</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
+                    <div class="nav-item dropdown">
+                        <a href="catalogo.html" class="nav-link dropdown-toggle active">Catálogo</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="postres.html" class="dropdown-item">Postres</a>
+                            <a href="tortas.html" class="dropdown-item">Tortas & Pies</a>
+                            <a href="cheesecakes.html" class="dropdown-item">Cheesecakes</a>
+                            <a href="salados.html" class="dropdown-item">Salados</a>
+                            <a href="cuchareables.html" class="dropdown-item">Cuchareables & Bandejas</a>
+                            <a href="compartir.html" class="dropdown-item">Para Compartir</a>
+                        </div>
+                    </div>
+                    <a href="carrito.html" class="nav-item nav-link">Carrito 🛒</a>
+                    <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Encabezado Catálogo Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="catalogo-header text-center">
+                <h1 class="catalogo-title">Catálogo Completo</h1>
+                <p class="catalogo-subtitle">Explora todos nuestros productos artesanales</p>
+            </div>
+        </div>
+    </div>
+    <!-- Encabezado Catálogo End -->
+
+    <!-- Contenido Principal Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Sidebar para Desktop -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="catalogo-sidebar">
+                        <h3 class="sidebar-title">Nuestras Categorías</h3>
+                        <a href="#postres" class="categoria-item" data-categoria="postres">
+                            <i class="fas fa-ice-cream"></i> Postres
+                        </a>
+                        <a href="#tortas-pies" class="categoria-item" data-categoria="tortas-pies">
+                            <i class="fas fa-birthday-cake"></i> Tortas & Pies
+                        </a>
+                        <a href="#cheesecakes" class="categoria-item" data-categoria="cheesecakes">
+                            <i class="fas fa-cheese"></i> Cheesecakes
+                        </a>
+                        <a href="#salados" class="categoria-item" data-categoria="salados">
+                            <i class="fas fa-bread-slice"></i> Salados
+                        </a>
+                        <a href="#cuchareables" class="categoria-item" data-categoria="cuchareables">
+                            <i class="fas fa-utensil-spoon"></i> Cuchareables
+                        </a>
+                        <a href="#compartir" class="categoria-item" data-categoria="compartir">
+                            <i class="fas fa-users"></i> Para Compartir
+                        </a>
+                        <a href="#todos" class="categoria-item" data-categoria="todos">
+                            <i class="fas fa-th-large"></i> Todos los Productos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Botón para abrir sidebar en móvil -->
+                <div class="col-12 d-lg-none mb-4">
+                    <button class="btn btn-primary btn-filtrar-movil" id="btnAbrirSidebar">
+                        <i class="fas fa-filter mr-2"></i> Filtrar por Categoría
+                    </button>
+                </div>
+
+                <!-- Productos -->
+                <div class="col-lg-9">
+                    <div class="row" id="productos-container">
+                        <!-- Los productos se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contenido Principal End -->
+
+    <!-- Footer Start -->
+    <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6 pr-lg-5 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mb-3 text-white"><span class="text-primary">Postres D'Katherine</span></h1>
+                    </a>
+                    <p>Postres artesanales hechos con amor ❤️.  
+                    Especialista en tartaletas, cheesecakes, cupcakes y kekes caseros.
+                    Usamos ingredientes frescos y naturales para asegurar el mejor sabor en cada pedido.</p>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square" href="https://wa.me/51986556921"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <div class="row">
+                        <div class="col-sm-6 mb-5">
+                            <h5 class="text-white text-uppercase mb-4">Enlaces</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
+                                <a class="text-white-50 mb-2" href="about.html"><i class="fa fa-angle-right mr-2"></i>Sobre mí</a>
+                                <a class="text-white-50 mb-2" href="catalogo.html"><i class="fa fa-angle-right mr-2"></i>Catálogo</a>
+                                <a class="text-white-50 mb-2" href="carrito.html"><i class="fa fa-angle-right mr-2"></i>Carrito 🛒</a>
+                                <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contáctanos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-light border-top py-4" style="border-color: rgba(256, 256, 256, .15) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0 text-white">
+                        &copy; 2025 <a href="#" class="text-primary">Postres D'Katherine</a>. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Carrito Flotante -->
+    <div class="carrito-flotante">
+        <div class="carrito-icono">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="carrito-contador">0</span>
+        </div>
+    </div>
+
+    <!-- Sidebar para Móvil -->
+    <div class="sidebar-movil" id="sidebarMovil">
+        <div class="sidebar-movil-header">
+            <h4 class="sidebar-movil-title">Nuestras Categorías</h4>
+            <button class="btn btn-sm btn-outline-secondary" id="btnCerrarSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <a href="#postres" class="categoria-item active" data-categoria="postres">
+            <i class="fas fa-ice-cream"></i> Postres
+        </a>
+        <a href="#tortas-pies" class="categoria-item" data-categoria="tortas-pies">
+            <i class="fas fa-birthday-cake"></i> Tortas & Pies
+        </a>
+        <a href="#cheesecakes" class="categoria-item" data-categoria="cheesecakes">
+            <i class="fas fa-cheese"></i> Cheesecakes
+        </a>
+        <a href="#salados" class="categoria-item" data-categoria="salados">
+            <i class="fas fa-bread-slice"></i> Salados
+        </a>
+        <a href="#cuchareables" class="categoria-item" data-categoria="cuchareables">
+            <i class="fas fa-utensil-spoon"></i> Cuchareables
+        </a>
+        <a href="#compartir" class="categoria-item" data-categoria="compartir">
+            <i class="fas fa-users"></i> Para Compartir
+        </a>
+        <a href="#todos" class="categoria-item" data-categoria="todos">
+            <i class="fas fa-th-large"></i> Todos los Productos
+        </a>
+    </div>
+    <div class="overlay-sidebar" id="overlaySidebar"></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Modal para seleccionar opciones -->
+    <div class="modal fade" id="modalOpciones" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="modalTitulo"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <img id="modalImagen" class="img-fluid rounded" src="" alt="" style="height: 300px; width: 100%; object-fit: cover;">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <p id="modalDescripcion" class="text-muted mb-4"></p>
+                            <div id="opcionesContainer" class="mb-4">
+                                <!-- Las opciones se cargarán dinámicamente aquí -->
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><strong>Cantidad:</strong></label>
+                                <div class="input-group mb-3" style="width: 150px;">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnMenosCantidad">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="number" class="form-control text-center" id="cantidadProducto" value="1" min="1" max="10">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnMasCantidad">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-0">Total:</h5>
+                                            <small id="detallePrecio" class="text-muted"></small>
+                                        </div>
+                                        <h3 class="text-primary mb-0" id="precioTotal">S/ 0.00</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                        <i class="fa fa-times mr-2"></i>Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAgregarModal">
+                        <i class="fa fa-shopping-cart mr-2"></i>Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Variables globales
+            let productoActual = null;
+            let opcionSeleccionada = null;
+            let cantidadProducto = 1;
+            let categoriaActual = 'todos';
+            let todosProductos = [];
+            
+            // Inicializar
+            inicializar();
+            
+            function inicializar() {
+                cargarProductos();
+                configurarSidebarMovil();
+                configurarModal();
+                configurarFiltros();
+                actualizarContadorCarrito();
+            }
+            
+            // Cargar todos los productos
+            function cargarProductos() {
+                todosProductos = [
+                    // POSTRES - Todos los productos de postres.html
+                    {
+                        id: 1,
+                        nombre: "Brownie de oreo",
+                        categoria: "postres",
+                        imagen: "img/postre6.jpg",
+                        descripcion: "Brownie húmedo con trozos de galleta Oreo",
+                        tipoModal: "brownie_oreo",
+                        opciones: [
+                            {
+                                tipo: "unidad",
+                                descripcion: "1 unidad",
+                                precio: 6.00,
+                                unidad: "unidad"
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        nombre: "Alfajores",
+                        categoria: "postres",
+                        imagen: "img/postre4.jpg",
+                        descripcion: "Galletas suaves rellenas de manjar",
+                        tipoModal: "alfajores",
+                        opciones: [
+                            {
+                                tipo: "cajita",
+                                descripcion: "Cajita de 8 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        nombre: "Alfajores bañados en chocolate",
+                        categoria: "postres",
+                        imagen: "img/postre5.jpg",
+                        descripcion: "Alfajores tradicionales cubiertos con chocolate derretido",
+                        tipoModal: "alfajores",
+                        opciones: [
+                            {
+                                tipo: "cajita",
+                                descripcion: "Cajita de 8 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        nombre: "Cupcake de coco con salsa de caramelo",
+                        categoria: "postres",
+                        imagen: "img/postre1.jpg",
+                        descripcion: "Cupcake esponjoso de coco con un toque dulce de caramelo",
+                        tipoModal: "cupcakes",
+                        opciones: [
+                            {
+                                tipo: "cajita_4",
+                                descripcion: "Cajita de 4 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            },
+                            {
+                                tipo: "cajita_6",
+                                descripcion: "Cajita de 6 unidades",
+                                precio: 22.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        nombre: "Cupcake de piña colada",
+                        categoria: "postres",
+                        imagen: "img/postre7.jpg",
+                        descripcion: "Cupcake con sabor tropical a coco y piña",
+                        tipoModal: "cupcakes",
+                        opciones: [
+                            {
+                                tipo: "cajita_4",
+                                descripcion: "Cajita de 4 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            },
+                            {
+                                tipo: "cajita_6",
+                                descripcion: "Cajita de 6 unidades",
+                                precio: 22.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    {
+                        id: 6,
+                        nombre: "Cupcake red velvet con relleno de fresa",
+                        categoria: "postres",
+                        imagen: "img/postre8.jpg",
+                        descripcion: "Cupcake húmedo y esponjoso con frosting de queso crema dulce y relleno de una salsa de fresa",
+                        tipoModal: "cupcakes",
+                        opciones: [
+                            {
+                                tipo: "cajita_4",
+                                descripcion: "Cajita de 4 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            },
+                            {
+                                tipo: "cajita_6",
+                                descripcion: "Cajita de 6 unidades",
+                                precio: 22.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    {
+                        id: 7,
+                        nombre: "Tartaleta de fresa",
+                        categoria: "postres",
+                        imagen: "img/postre9.jpg",
+                        descripcion: "Base crocante con crema suave y fresas frescas",
+                        tipoModal: "tartaletas",
+                        opciones: [
+                            {
+                                tipo: "entero",
+                                descripcion: "Molde entero",
+                                precio: 22.00,
+                                unidad: "molde"
+                            },
+                            {
+                                tipo: "porcion",
+                                descripcion: "Porción individual",
+                                precio: 6.00,
+                                unidad: "porción"
+                            }
+                        ]
+                    },
+                    {
+                        id: 8,
+                        nombre: "Tartaleta de maracuyá",
+                        categoria: "postres",
+                        imagen: "img/postre10.jpg",
+                        descripcion: "Crujiente y cremosa, con el sabor cítrico del maracuyá",
+                        tipoModal: "tartaletas",
+                        opciones: [
+                            {
+                                tipo: "entero",
+                                descripcion: "Molde entero",
+                                precio: 22.00,
+                                unidad: "molde"
+                            },
+                            {
+                                tipo: "porcion",
+                                descripcion: "Porción individual",
+                                precio: 6.00,
+                                unidad: "porción"
+                            }
+                        ]
+                    },
+                    {
+                        id: 9,
+                        nombre: "Brownie",
+                        categoria: "postres",
+                        imagen: "img/brow.jpg",
+                        descripcion: "Brownie clásico húmedo y delicioso",
+                        tipoModal: "brownie",
+                        opciones: [
+                            {
+                                tipo: "unidad",
+                                descripcion: "1 unidad",
+                                precio: 5.00,
+                                unidad: "unidad"
+                            },
+                            {
+                                tipo: "cajita",
+                                descripcion: "Cajita de 4 unidades",
+                                precio: 15.00,
+                                unidad: "cajita"
+                            }
+                        ]
+                    },
+                    
+                    // Tortas & Pies
+                    {
+                        id: 10,
+                        nombre: "Pie de limón",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta2.jpg",
+                        descripcion: "Relleno cremoso de limón sobre una base crocante",
+                        tipoModal: "pie_limon",
+                        opciones: [
+                            { tipo: "entero", descripcion: "Pie entero", precio: 22.00, unidad: "pie" },
+                            { tipo: "porcion", descripcion: "Porción individual", precio: 6.00, unidad: "porción" }
+                        ]
+                    },
+                    {
+                        id: 11,
+                        nombre: "Pie de manzana",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta3.jpg",
+                        descripcion: "Manzanas horneadas con canela en masa crujiente",
+                        tipoModal: "pie_manzana",
+                        opciones: [
+                            { tipo: "entero", descripcion: "Pie entero", precio: 22.00, unidad: "pie" },
+                            { tipo: "porcion", descripcion: "Porción individual", precio: 6.00, unidad: "porción" }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        nombre: "Keke de plátano",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta4.jpg",
+                        descripcion: "Bizcocho casero suave con plátano natural",
+                        tipoModal: "keke",
+                        opciones: [
+                            { tipo: "molde", descripcion: "Molde rectangular de 1/2 kg", precio: 18.00, unidad: "molde" }
+                        ]
+                    },
+                    {
+                        id: 13,
+                        nombre: "Keke de vainilla",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta5.jpg",
+                        descripcion: "Clásico, esponjoso y con aroma a vainilla pura",
+                        tipoModal: "keke",
+                        opciones: [
+                            { tipo: "molde", descripcion: "Molde rectangular de 1/2 kg", precio: 18.00, unidad: "molde" }
+                        ]
+                    },
+                    {
+                        id: 14,
+                        nombre: "Keke de maracuyá",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta6.jpg",
+                        descripcion: "Bizcocho ligero con notas frutales y frescas",
+                        tipoModal: "keke",
+                        opciones: [
+                            { tipo: "molde", descripcion: "Molde rectangular de 1/2 kg", precio: 18.00, unidad: "molde" }
+                        ]
+                    },
+                    {
+                        id: 15,
+                        nombre: "Keke marmoleado",
+                        categoria: "tortas-pies",
+                        imagen: "img/torta7.jpg",
+                        descripcion: "Combina vainilla y chocolate en un marmoleado perfecto",
+                        tipoModal: "keke",
+                        opciones: [
+                            { tipo: "molde", descripcion: "Molde rectangular de 1/2 kg", precio: 18.00, unidad: "molde" }
+                        ]
+                    },
+
+                    // Cheesecakes
+                    {
+                        id: 16,
+                        nombre: "Cheesecake de Fresa",
+                        categoria: "cheesecakes",
+                        imagen: "img/cheesecake1.jpg",
+                        descripcion: "Cheesecake suave con cobertura de fresas frescas",
+                        tipoModal: "cheesecake_fresa",
+                        opciones: [
+                            { tipo: "entero", descripcion: "Cheesecake entero", precio: 28.00, unidad: "cheesecake" },
+                            { tipo: "porcion", descripcion: "Porción individual", precio: 7.00, unidad: "porción" }
+                        ]
+                    },
+                    {
+                        id: 17,
+                        nombre: "Cheesecake de Maracuyá",
+                        categoria: "cheesecakes",
+                        imagen: "img/cheesecake2.jpg",
+                        descripcion: "Cremoso cheesecake con topping de maracuyá",
+                        tipoModal: "cheesecake_maracuya",
+                        opciones: [
+                            { tipo: "entero", descripcion: "Cheesecake entero", precio: 28.00, unidad: "cheesecake" },
+                            { tipo: "porcion", descripcion: "Porción individual", precio: 7.00, unidad: "porción" }
+                        ]
+                    },
+
+                    // Salados
+                    {
+                        id: 18,
+                        nombre: "Empanadas de Carne",
+                        categoria: "salados",
+                        imagen: "img/salado1.jpg",
+                        descripcion: "Masa dorada con relleno jugoso y casero",
+                        tipoModal: "empanadas",
+                        opciones: [
+                            { tipo: "4_und", descripcion: "4 unidades", precio: 12.00, unidad: "paquete" },
+                            { tipo: "6_und", descripcion: "6 unidades", precio: 18.00, unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 19,
+                        nombre: "Empanadas de Pollo",
+                        categoria: "salados",
+                        imagen: "img/salado2.jpg",
+                        descripcion: "Masa dorada con relleno cremoso de pollo desmenuzado",
+                        tipoModal: "empanadas",
+                        opciones: [
+                            { tipo: "4_und", descripcion: "4 unidades", precio: 12.00, unidad: "paquete" },
+                            { tipo: "6_und", descripcion: "6 unidades", precio: 18.00, unidad: "paquete" }
+                        ]
+                    },
+
+                    // Cuchareables & Bandejas
+                    {
+                        id: 22,
+                        nombre: "Cuchareable de Chocolate",
+                        categoria: "cuchareables",
+                        imagen: "img/copa1.jpg",
+                        descripcion: "Postre cremoso y húmedo, con un sabor intenso a chocolate ideal para disfrutar a cucharadas",
+                        tipoModal: "cuchareable_chocolate",
+                        opciones: [
+                            { tipo: "unidad", descripcion: "1 unidad", precio: 6.00, unidad: "unidad" }
+                        ]
+                    },
+                    {
+                        id: 23,
+                        nombre: "Cuchareable de Tres Leches",
+                        categoria: "cuchareables",
+                        imagen: "img/copa2.jpg",
+                        descripcion: "Versión suave, dulce y muy húmeda, lista para comer directamente con cuchara",
+                        tipoModal: "cuchareable_tresleches",
+                        opciones: [
+                            { tipo: "unidad", descripcion: "1 unidad", precio: 6.00, unidad: "unidad" }
+                        ]
+                    },
+                    {
+                        id: 24,
+                        nombre: "Cuchareable de Carrot Cake",
+                        categoria: "cuchareables",
+                        imagen: "img/copa3.jpg",
+                        descripcion: "Pastel cremoso y especiado de zanahoria, con textura húmeda para comer al instante",
+                        tipoModal: "cuchareable_carrot",
+                        opciones: [
+                            { tipo: "unidad", descripcion: "1 unidad", precio: 7.00, unidad: "unidad" }
+                        ]
+                    },
+                    {
+                        id: 25,
+                        nombre: "Cuchareable de Red Velvet",
+                        categoria: "cuchareables",
+                        imagen: "img/copa4.jpg",
+                        descripcion: "Postre de red velvet suave y cremoso, con el clásico sabor cacao–vainilla listo para comer a cucharadas",
+                        tipoModal: "cuchareable_redvelvet",
+                        opciones: [
+                            { tipo: "unidad", descripcion: "1 unidad", precio: 7.00, unidad: "unidad" }
+                        ]
+                    },
+                    {
+                        id: 26,
+                        nombre: "Bandeja de Chocolate",
+                        categoria: "cuchareables",
+                        imagen: "img/bandeja1.jpg",
+                        descripcion: "Bandeja generosa de chocolate suave y húmedo, perfecta para compartir en reuniones y celebraciones",
+                        tipoModal: "bandeja_chocolate",
+                        opciones: [
+                            { tipo: "bandeja", descripcion: "Bandeja completa", precio: 18.00, unidad: "bandeja" }
+                        ]
+                    },
+                    {
+                        id: 27,
+                        nombre: "Bandeja de Tres Leches",
+                        categoria: "cuchareables",
+                        imagen: "img/bandeja2.jpg",
+                        descripcion: "Bandeja completa de tres leches empapada y esponjosa, ideal para eventos o para varias porciones",
+                        tipoModal: "bandeja_tresleches",
+                        opciones: [
+                            { tipo: "bandeja", descripcion: "Bandeja completa", precio: 20.00, unidad: "bandeja" }
+                        ]
+                    },
+                    {
+                        id: 28,
+                        nombre: "Bandeja de Carrot Cake",
+                        categoria: "cuchareables",
+                        imagen: "img/bandeja3.jpg",
+                        descripcion: "Bizcocho de zanahoria en bandeja, suave, especiado y perfecto para compartir en familia",
+                        tipoModal: "bandeja_carrot",
+                        opciones: [
+                            { tipo: "bandeja", descripcion: "Bandeja completa", precio: 22.00, unidad: "bandeja" }
+                        ]
+                    },
+                    {
+                        id: 29,
+                        nombre: "Bandeja de Red Velvet",
+                        categoria: "cuchareables",
+                        imagen: "img/bandeja4.jpg",
+                        descripcion: "Bandeja con porciones de red velvet esponjoso y crema suave, ideal para compartir en ocasiones especiales",
+                        tipoModal: "bandeja_redvelvet",
+                        opciones: [
+                            { tipo: "bandeja", descripcion: "Bandeja completa", precio: 22.00, unidad: "bandeja" }
+                        ]
+                    },
+
+                    // Para Compartir
+                    {
+                        id: 30,
+                        nombre: "Mini alfajores",
+                        categoria: "compartir",
+                        imagen: "img/compartir1.jpg",
+                        descripcion: "Mini alfajores artesanales rellenos de manjar",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 18.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 34.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 65.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 31,
+                        nombre: "Mini brownies",
+                        categoria: "compartir",
+                        imagen: "img/compartir2.jpg",
+                        descripcion: "Brownies en mini porción, húmedos y deliciosos",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 20.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 38.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 72.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 32,
+                        nombre: "Mini tartaletas",
+                        categoria: "compartir",
+                        imagen: "img/compartir3.jpg",
+                        descripcion: "Tartaletas pequeñas con diversos rellenos",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 22.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 42.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 80.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 33,
+                        nombre: "Mini triples jamón/pollo/durazno",
+                        categoria: "compartir",
+                        imagen: "img/salado3.jpg",
+                        descripcion: "Triples pequeños con relleno de jamón, pollo o durazno",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 30.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 55.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 105.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 34,
+                        nombre: "Mini triples tocino",
+                        categoria: "compartir",
+                        imagen: "img/salado4.jpg",
+                        descripcion: "Triples pequeños con relleno de tocino",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 32.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 58.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 110.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 35,
+                        nombre: "Petipán",
+                        categoria: "compartir",
+                        imagen: "img/compartir5.jpg",
+                        descripcion: "Panecillos pequeños y suaves, ideales para eventos",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 28.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 52.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 100.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 36,
+                        nombre: "Mini conitos con manjar",
+                        categoria: "compartir",
+                        imagen: "img/compartir6.jpg",
+                        descripcion: "Conitos rellenos de manjar, perfectos para compartir",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 25.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 48.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 92.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    },
+                    {
+                        id: 37,
+                        nombre: "Mini mil hojas",
+                        categoria: "compartir",
+                        imagen: "img/compartir7.jpg",
+                        descripcion: "Mil hojas en versión mini, crujiente y cremoso",
+                        tipoModal: "compartir",
+                        opciones: [
+                            { cantidad: 25, precio: 28.00, descripcion: "25 unidades", unidad: "paquete" },
+                            { cantidad: 50, precio: 55.00, descripcion: "50 unidades", unidad: "paquete" },
+                            { cantidad: 100, precio: 105.00, descripcion: "100 unidades", unidad: "paquete" }
+                        ]
+                    }
+                ];
+    
+                mostrarProductos('todos');
+            }
+            
+            // Función para mostrar productos según categoría
+            function mostrarProductos(categoria) {
+                const container = $('#productos-container');
+                container.empty();
+                
+                let productosFiltrados = [];
+                
+                if (categoria === 'todos') {
+                    productosFiltrados = todosProductos;
+                } else {
+                    productosFiltrados = todosProductos.filter(producto => producto.categoria === categoria);
+                }
+                
+                if (productosFiltrados.length === 0) {
+                    container.html(`
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                            <h4 class="text-muted">No se encontraron productos en esta categoría</h4>
+                        </div>
+                    `);
+                    return;
+                }
+                
+                productosFiltrados.forEach(producto => {
+                    const precioMinimo = Math.min(...producto.opciones.map(op => op.precio));
+                    
+                    const productoHtml = `
+                        <div class="col-lg-4 col-md-6 mb-4" data-categoria="${producto.categoria}">
+                            <div class="producto-card shadow-sm">
+                                <div class="position-relative">
+                                    <img class="producto-img" src="${producto.imagen}" alt="${producto.nombre}">
+                                    <span class="producto-badge">${obtenerNombreCategoria(producto.categoria)}</span>
+                                </div>
+                                <div class="p-3">
+                                    <div class="producto-categoria">${obtenerNombreCategoria(producto.categoria)}</div>
+                                    <h5 class="font-weight-bold mb-2">${producto.nombre}</h5>
+                                    <p class="text-muted small mb-3" style="min-height: 40px;">${producto.descripcion}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="text-primary font-weight-bold">Desde S/ ${precioMinimo.toFixed(2)}</span>
+                                        </div>
+                                        <button class="btn btn-outline-primary btn-sm btn-seleccionar"
+                                                data-id="${producto.id}"
+                                                data-nombre="${producto.nombre}"
+                                                data-categoria="${producto.categoria}"
+                                                data-imagen="${producto.imagen}"
+                                                data-descripcion="${producto.descripcion}"
+                                                data-tipomodal="${producto.tipoModal}">
+                                            <i class="fa fa-shopping-cart mr-1"></i> Seleccionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.append(productoHtml);
+                });
+            }
+            
+            // Obtener nombre amigable de categoría
+            function obtenerNombreCategoria(categoria) {
+                const categorias = {
+                    'postres': 'Postres',
+                    'tortas-pies': 'Tortas & Pies',
+                    'cheesecakes': 'Cheesecakes',
+                    'salados': 'Salados',
+                    'cuchareables': 'Cuchareables',
+                    'compartir': 'Para Compartir'
+                };
+                return categorias[categoria] || categoria;
+            }
+            
+            // Configurar sidebar móvil
+            function configurarSidebarMovil() {
+                $('#btnAbrirSidebar').on('click', function() {
+                    $('#sidebarMovil').addClass('active');
+                    $('#overlaySidebar').addClass('active');
+                });
+                
+                $('#btnCerrarSidebar').on('click', function() {
+                    cerrarSidebar();
+                });
+                
+                $('#overlaySidebar').on('click', function() {
+                    cerrarSidebar();
+                });
+                
+                // Cerrar sidebar al seleccionar categoría en móvil
+                $('.sidebar-movil .categoria-item').on('click', function() {
+                    setTimeout(() => {
+                        cerrarSidebar();
+                    }, 300);
+                });
+                
+                function cerrarSidebar() {
+                    $('#sidebarMovil').removeClass('active');
+                    $('#overlaySidebar').removeClass('active');
+                }
+            }
+            
+            // Configurar filtros de categoría
+            function configurarFiltros() {
+                $('.categoria-item').on('click', function(e) {
+                    e.preventDefault();
+                    
+                    const categoria = $(this).data('categoria');
+                    categoriaActual = categoria;
+                    
+                    // Actualizar clase activa
+                    $('.categoria-item').removeClass('active');
+                    $(this).addClass('active');
+                    
+                    // Mostrar productos
+                    mostrarProductos(categoria);
+                    
+                    // Scroll suave al inicio de productos
+                    $('html, body').animate({
+                        scrollTop: $('#productos-container').offset().top - 100
+                    }, 300);
+                });
+            }
+            
+            // Configurar modal
+            function configurarModal() {
+                // Evento para abrir modal
+                $(document).on('click', '.btn-seleccionar', function() {
+                    const id = $(this).data('id');
+                    const nombre = $(this).data('nombre');
+                    const categoria = $(this).data('categoria');
+                    const imagen = $(this).data('imagen');
+                    const descripcion = $(this).data('descripcion');
+                    const tipoModal = $(this).data('tipomodal');
+                    
+                    productoActual = {
+                        id: id,
+                        nombre: nombre,
+                        categoria: categoria,
+                        imagen: imagen,
+                        descripcion: descripcion,
+                        tipoModal: tipoModal
+                    };
+                    
+                    // Resetear valores
+                    cantidadProducto = 1;
+                    $('#cantidadProducto').val(1);
+                    opcionSeleccionada = null;
+                    
+                    // Llenar modal
+                    $('#modalTitulo').text(nombre);
+                    $('#modalDescripcion').text(descripcion);
+                    $('#modalImagen').attr('src', imagen);
+                    
+                    // Cargar opciones
+                    cargarOpcionesModal(productoActual);
+                    
+                    // Mostrar modal
+                    $('#modalOpciones').modal('show');
+                });
+                
+                // Eventos cantidad
+                $('#btnMasCantidad').on('click', function() {
+                    let valorActual = parseInt($('#cantidadProducto').val());
+                    if (valorActual < 10) {
+                        cantidadProducto = valorActual + 1;
+                        $('#cantidadProducto').val(cantidadProducto);
+                        actualizarPrecioModal();
+                    }
+                });
+                
+                $('#btnMenosCantidad').on('click', function() {
+                    let valorActual = parseInt($('#cantidadProducto').val());
+                    if (valorActual > 1) {
+                        cantidadProducto = valorActual - 1;
+                        $('#cantidadProducto').val(cantidadProducto);
+                        actualizarPrecioModal();
+                    }
+                });
+                
+                $('#cantidadProducto').on('change', function() {
+                    cantidadProducto = parseInt($(this).val()) || 1;
+                    if (cantidadProducto < 1) cantidadProducto = 1;
+                    if (cantidadProducto > 10) cantidadProducto = 10;
+                    $(this).val(cantidadProducto);
+                    actualizarPrecioModal();
+                });
+            }
+            
+            // Cargar opciones en modal según producto
+            function cargarOpcionesModal(producto) {
+                const container = $('#opcionesContainer');
+                container.empty();
+                
+                // Encontrar el producto en la lista
+                const productoData = todosProductos.find(p => p.id === producto.id);
+                
+                if (productoData && productoData.opciones) {
+                    productoData.opciones.forEach((opcion, index) => {
+                        const esCompartir = producto.categoria === 'compartir';
+                        const precioPorUnidad = esCompartir ? (opcion.precio / opcion.cantidad).toFixed(2) : null;
+                        
+                        const opcionHtml = `
+                            <div class="opcion-item ${index === 0 ? 'selected' : ''}" 
+                                 data-index="${index}"
+                                 data-precio="${opcion.precio}"
+                                 data-tipo="${opcion.tipo || ''}"
+                                 data-cantidad="${opcion.cantidad || ''}"
+                                 data-descripcion="${opcion.descripcion}"
+                                 data-unidad="${opcion.unidad}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="opcion-titulo">${opcion.descripcion}</div>
+                                        ${esCompartir ? 
+                                            `<div class="text-muted small">S/ ${precioPorUnidad} por unidad</div>` : 
+                                            ''
+                                        }
+                                    </div>
+                                    <div class="opcion-precio">S/ ${opcion.precio.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `;
+                        container.append(opcionHtml);
+                        
+                        if (index === 0) {
+                            opcionSeleccionada = {
+                                descripcion: opcion.descripcion,
+                                precio: opcion.precio,
+                                tipo: opcion.tipo || '',
+                                cantidad: opcion.cantidad || 1,
+                                unidad: opcion.unidad
+                            };
+                            actualizarPrecioModal();
+                        }
+                    });
+                }
+                
+                // Evento para seleccionar opción
+                $(document).on('click', '.opcion-item', function() {
+                    $('.opcion-item').removeClass('selected');
+                    $(this).addClass('selected');
+                    
+                    opcionSeleccionada = {
+                        descripcion: $(this).data('descripcion'),
+                        precio: parseFloat($(this).data('precio')),
+                        tipo: $(this).data('tipo'),
+                        cantidad: $(this).data('cantidad') || 1,
+                        unidad: $(this).data('unidad')
+                    };
+                    
+                    actualizarPrecioModal();
+                });
+            }
+            
+            // Actualizar precio en modal
+            function actualizarPrecioModal() {
+                if (!opcionSeleccionada || !productoActual) return;
+                
+                const precioTotal = opcionSeleccionada.precio * cantidadProducto;
+                let detalle = '';
+                
+                if (productoActual.categoria === 'compartir') {
+                    const totalUnidades = opcionSeleccionada.cantidad * cantidadProducto;
+                    detalle = `${cantidadProducto} ${cantidadProducto === 1 ? 'paquete' : 'paquetes'} de ${opcionSeleccionada.cantidad} unidades`;
+                    detalle += `<br><small>Total: ${totalUnidades} unidades</small>`;
+                } else {
+                    detalle = `${cantidadProducto} ${cantidadProducto === 1 ? opcionSeleccionada.unidad : opcionSeleccionada.unidad + 's'} de ${opcionSeleccionada.descripcion}`;
+                }
+                
+                $('#detallePrecio').html(detalle);
+                $('#precioTotal').text(`S/ ${precioTotal.toFixed(2)}`);
+            }
+            
+            // Agregar al carrito desde modal
+            $('#btnAgregarModal').on('click', function() {
+                if (!productoActual || !opcionSeleccionada) return;
+                
+                // Crear objeto producto
+                const productoCarrito = {
+                    id: productoActual.id,
+                    nombre: productoActual.nombre,
+                    categoria: productoActual.categoria,
+                    descripcion: productoActual.descripcion,
+                    imagen: productoActual.imagen,
+                    agregado: new Date().toISOString()
+                };
+                
+                // Agregar detalles específicos según categoría
+                if (productoActual.categoria === 'compartir') {
+                    productoCarrito.tipoOpcion = 'paquete';
+                    productoCarrito.descripcionOpcion = `${opcionSeleccionada.cantidad} unidades por paquete`;
+                    productoCarrito.cantidadPaquetes = cantidadProducto;
+                    productoCarrito.cantidadUnidadesPorPaquete = opcionSeleccionada.cantidad;
+                    productoCarrito.totalUnidades = opcionSeleccionada.cantidad * cantidadProducto;
+                    productoCarrito.precioPaquete = opcionSeleccionada.precio.toFixed(2);
+                    productoCarrito.precioTotal = (opcionSeleccionada.precio * cantidadProducto).toFixed(2);
+                    productoCarrito.precioPorUnidad = (opcionSeleccionada.precio / opcionSeleccionada.cantidad).toFixed(2);
+                } else {
+                    productoCarrito.tipoOpcion = opcionSeleccionada.tipo;
+                    productoCarrito.descripcionOpcion = opcionSeleccionada.descripcion;
+                    productoCarrito.cantidad = cantidadProducto;
+                    productoCarrito.precioUnitario = opcionSeleccionada.precio.toFixed(2);
+                    productoCarrito.precioTotal = (opcionSeleccionada.precio * cantidadProducto).toFixed(2);
+                    productoCarrito.unidad = opcionSeleccionada.unidad;
+                }
+                
+                // Obtener clave correcta para localStorage
+                const claveStorage = obtenerClaveStorage(productoActual.categoria);
+                let carritoCategoria = JSON.parse(localStorage.getItem(claveStorage)) || [];
+                
+                // Agregar producto
+                carritoCategoria.push(productoCarrito);
+                
+                // Guardar en localStorage
+                localStorage.setItem(claveStorage, JSON.stringify(carritoCategoria));
+                
+                // Actualizar contador
+                actualizarContadorCarrito();
+                
+                // Cerrar modal
+                $('#modalOpciones').modal('hide');
+                
+                // Mostrar notificación
+                mostrarNotificacion('¡Producto agregado al carrito!');
+                
+                // Resetear variables
+                productoActual = null;
+                opcionSeleccionada = null;
+                cantidadProducto = 1;
+            });
+            
+            // Obtener clave correcta para localStorage según categoría
+            function obtenerClaveStorage(categoria) {
+                const claves = {
+                    'postres': 'carritoPostres',
+                    'tortas-pies': 'carritoTortasPies',
+                    'cheesecakes': 'carritoCheesecakes',
+                    'salados': 'carritoSalados',
+                    'cuchareables': 'carritoCuchareable',
+                    'compartir': 'carritoCompartir'
+                };
+                return claves[categoria] || 'carritoGeneral';
+            }
+            
+            // Mostrar notificación
+            function mostrarNotificacion(mensaje) {
+                const $notificacion = $(`
+                    <div class="alert alert-success alert-dismissible fade show" 
+                        style="position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 300px;">
+                        <i class="fa fa-check-circle mr-2"></i>${mensaje}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                `);
+                
+                $('body').append($notificacion);
+                
+                setTimeout(() => {
+                    $notificacion.alert('close');
+                }, 3000);
+            }
+            
+            // Actualizar contador del carrito
+            function actualizarContadorCarrito() {
+                let contadorTotal = 0;
+                const claves = [
+                    'carritoPostres',
+                    'carritoTortasPies', 
+                    'carritoCheesecakes',
+                    'carritoSalados',
+                    'carritoCuchareable',
+                    'carritoCompartir'
+                ];
+                
+                claves.forEach(clave => {
+                    const carrito = JSON.parse(localStorage.getItem(clave)) || [];
+                    contadorTotal += carrito.length;
+                });
+                
+                $('.carrito-contador').text(contadorTotal);
+            }
+            
+            // Redirigir al carrito
+            $('.carrito-icono').on('click', function() {
+                window.location.href = 'carrito.html';
+            });
+            
+            // Resetear modal al cerrar
+            $('#modalOpciones').on('hidden.bs.modal', function() {
+                $('#opcionesContainer').empty();
+                productoActual = null;
+                opcionSeleccionada = null;
+                cantidadProducto = 1;
+                $('#cantidadProducto').val(1);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dolce - Cheesecakes</title>
+    <title>Dolce - Para Compartir</title>
+    <meta content="compartir, minis, eventos, fiestas, reuniones, catering" name="keywords">
+    <meta content="Deliciosos minis postres y bocaditos perfectos para compartir en eventos y reuniones" name="description">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="cheesecakes, postres, queso, postres de queso, cheesecake de frutas" name="keywords">
-    <meta content="Deliciosos cheesecakes artesanales hechos con queso crema premium y los mejores ingredientes" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -26,25 +26,53 @@
     <link href="css/style.css" rel="stylesheet">
     
     <style>
-        .postre-card {
+        .franja-compartir {
+            background-color: #FEF1EF;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            margin-top: 80px;
+        }
+        
+        .franja-contenido {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .franja-titulo {
+            color: #211E1C;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .franja-descripcion {
+            color: #757575;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .producto-card {
             transition: transform 0.3s, box-shadow 0.3s;
             border-radius: 10px;
             overflow: hidden;
             height: 100%;
+            border: 1px solid #FEF1EF;
         }
         
-        .postre-card:hover {
+        .producto-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
         }
         
-        .postre-overlay {
+        .producto-overlay {
             position: absolute;
             top: 15px;
             right: 15px;
         }
         
-        .postre-badge {
+        .producto-badge {
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -53,11 +81,43 @@
             color: white;
         }
         
-        .btn-agregar-carrito {
-            transition: all 0.3s;
+        .tabla-precios {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
         }
         
-        .btn-agregar-carrito:hover {
+        .tabla-precios th {
+            background-color: #F9A392;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .tabla-precios td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #FEF1EF;
+        }
+        
+        .tabla-precios tr:hover {
+            background-color: #FEF1EF;
+        }
+        
+        .precio-destacado {
+            color: #211E1C;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .btn-seleccionar {
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .btn-seleccionar:hover {
             background-color: #f56649 !important;
             border-color: #f56649 !important;
         }
@@ -105,40 +165,22 @@
             font-weight: bold;
         }
         
-        /* Franja rosa pastel para el encabezado */
-        .franja-postres {
-            background-color: #FEF1EF; /* Color light de tu paleta */
-            padding: 40px 0;
-            margin-bottom: 40px;
-            border-radius: 10px;
-            margin-top: 80px;
+        /* Estilos para el modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
         }
         
-        .franja-contenido {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+        .modal-header {
+            background-color: #FEF1EF;
+            border-radius: 15px 15px 0 0;
         }
         
-        .franja-titulo {
-            color: #211E1C; /* Color dark de tu paleta */
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
+        .modal-title {
+            color: #211E1C;
+            font-weight: 600;
         }
         
-        .franja-descripcion {
-            color: #757575; /* Color gris de tu paleta */
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Estilos para el modal de opciones */
-        .opciones-container {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
         .opcion-item {
             border: 1px solid #dee2e6;
             border-radius: 8px;
@@ -147,35 +189,29 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
+        
         .opcion-item:hover {
             border-color: #F9A392;
             background-color: #FEF1EF;
         }
-
+        
         .opcion-item.selected {
             border-color: #F9A392;
             background-color: #FEF1EF;
         }
-
+        
         .opcion-titulo {
             font-weight: 600;
             color: #211E1C;
             margin-bottom: 5px;
         }
-
+        
         .opcion-precio {
             color: #F9A392;
             font-weight: 600;
             font-size: 1.1rem;
         }
-
-        .opcion-descripcion {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-bottom: 5px;
-        }
-
+        
         .badge-descuento {
             background-color: #28a745;
             color: white;
@@ -184,23 +220,25 @@
             border-radius: 10px;
             margin-left: 5px;
         }
-
-        .postre-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        
+        .input-group .btn-outline-secondary {
+            border-color: #dee2e6;
+            color: #757575;
         }
-
-        .postre-card .card-body {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+        
+        .input-group .btn-outline-secondary:hover {
+            background-color: #F9A392;
+            border-color: #F9A392;
+            color: white;
         }
-
-        .postre-card .mt-4 {
-            margin-top: auto !important;
+        
+        /* Imágenes uniformes */
+        .producto-img {
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
         }
-
     </style>
 </head>
 
@@ -262,43 +300,42 @@
     </div>
     <!-- Navbar End -->
 
-    <!-- Franja Cheesecakes Start -->
+    <!-- Franja Compartir Start -->
     <div class="container-fluid">
         <div class="container">
-            <div class="franja-postres">
+            <div class="franja-compartir">
                 <div class="franja-contenido">
-                    <h1 class="franja-titulo">Cheesecakes</h1>
+                    <h1 class="franja-titulo">Para Compartir</h1>
                     <p class="franja-descripcion">
-                        Nuestros cheesecakes son una experiencia cremosa y deliciosa. Hechos con queso crema premium y una base crujiente de galleta, cada bocado es pura felicidad.
+                        Mini postres y bocaditos perfectos para eventos, reuniones y celebraciones. ¡Ideal para compartir momentos especiales!
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Franja Cheesecakes End -->
+    <!-- Franja Compartir End -->
 
-    <!-- Cheesecakes Start -->
+    <!-- Productos Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row">
-                <!-- Cheesecake 1 -->
+                <!-- Producto 1: Mini alfajores -->
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="postre-card border-0 shadow-sm">
+                    <div class="producto-card border-0 shadow-sm">
                         <div class="position-relative">
-                            <img class="img-fluid w-100" src="img/cheesecake1.jpg" alt="Cheesecake de Fresa" style="height: 280px; object-fit: cover; object-position: center;">
-                            <div class="postre-overlay">
-                                <div class="postre-badge">Cheesecake</div>
+                            <img class="img-fluid producto-img" src="img/compartir1.jpg" alt="Mini alfajores">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
                             </div>
                         </div>
                         <div class="card-body text-center p-4 d-flex flex-column">
-                            <h4 class="card-title">Cheesecake de Fresa</h4>
-                            <p class="card-text text-muted flex-grow-1">Cheesecake suave con cobertura de fresas frescas</p>
-                            <div class="mt-4">
-                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
-                                        data-postre="Cheesecake de Fresa" 
-                                        data-tipo="cheesecake_fresa"
-                                        data-imagen="img/cheesecake1.jpg"
-                                        data-descripcion="Cheesecake suave con cobertura de fresas frescas">
+                            <h4 class="card-title">Mini alfajores</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini alfajores" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir1.jpg"
+                                        data-descripcion="Mini alfajores artesanales rellenos de manjar">
                                     <i class="fa fa-cog mr-2"></i>Seleccionar opciones
                                 </button>
                             </div>
@@ -306,24 +343,167 @@
                     </div>
                 </div>
 
-                <!-- Cheesecake 2 -->
+                <!-- Producto 2: Mini brownies -->
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="postre-card border-0 shadow-sm">
+                    <div class="producto-card border-0 shadow-sm">
                         <div class="position-relative">
-                            <img class="img-fluid w-100" src="img/cheesecake2.jpg" alt="Cheesecake de Maracuyá" style="height: 280px; object-fit: cover; object-position: center;">
-                            <div class="postre-overlay">
-                                <div class="postre-badge">Cheesecake</div>
+                            <img class="img-fluid producto-img" src="img/compartir2.jpg" alt="Mini brownies">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
                             </div>
                         </div>
                         <div class="card-body text-center p-4 d-flex flex-column">
-                            <h4 class="card-title">Cheesecake de Maracuyá</h4>
-                            <p class="card-text text-muted flex-grow-1">Cremoso cheesecake con topping de maracuyá</p>
-                            <div class="mt-4">
-                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
-                                        data-postre="Cheesecake de Maracuyá" 
-                                        data-tipo="cheesecake_maracuya"
-                                        data-imagen="img/cheesecake2.jpg"
-                                        data-descripcion="Cremoso cheesecake con topping de maracuyá">
+                            <h4 class="card-title">Mini brownies</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini brownies" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir2.jpg"
+                                        data-descripcion="Brownies en mini porción, húmedos y deliciosos">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Mini tartaletas -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/compartir3.jpg" alt="Mini tartaletas">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Mini tartaletas</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini tartaletas" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir3.jpg"
+                                        data-descripcion="Tartaletas pequeñas con diversos rellenos">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4: Mini triples jamón/pollo/durazno -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/salado3.jpg" alt="Mini triples">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Mini triples de jamón, pollo y durazno</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini triples jamón/pollo/durazno" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/salado3.jpg"
+                                        data-descripcion="Triples pequeños con relleno de jamón, pollo o durazno">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 5: Mini triples tocino -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/salado4.jpg" alt="Mini triples tocino">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Mini triples de tocino</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini triples tocino" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/salado4.jpg"
+                                        data-descripcion="Triples pequeños con relleno de tocino">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 6: Petipán -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/compartir5.jpg" alt="Petipán">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Petipán</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Petipán" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir5.jpg"
+                                        data-descripcion="Panecillos pequeños y suaves, ideales para eventos">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 7: Mini conitos con manjar -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/compartir6.jpg" alt="Mini conitos con manjar">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Mini conitos con manjar</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini conitos con manjar" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir6.jpg"
+                                        data-descripcion="Conitos rellenos de manjar, perfectos para compartir">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 8: Mini mil hojas -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="producto-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid producto-img" src="img/compartir7.jpg" alt="Mini mil hojas">
+                            <div class="producto-overlay">
+                                <div class="producto-badge">Para Compartir</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Mini mil hojas</h4>
+                            <div class="mt-auto">
+                                <button class="btn btn-primary btn-seleccionar w-100" 
+                                        data-producto="Mini mil hojas" 
+                                        data-categoria="Compartir"
+                                        data-imagen="img/compartir7.jpg"
+                                        data-descripcion="Mil hojas en versión mini, crujiente y cremoso">
                                     <i class="fa fa-cog mr-2"></i>Seleccionar opciones
                                 </button>
                             </div>
@@ -333,7 +513,7 @@
             </div>
         </div>
     </div>
-    <!-- Cheesecakes End -->
+    <!-- Productos End -->
 
     <!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
@@ -417,33 +597,34 @@
                     <div class="row">
                         <!-- Columna izquierda: Imagen -->
                         <div class="col-md-6 text-center">
-                            <img id="modalImagen" class="img-fluid rounded" src="" alt="" style="height: 320px; width: 100%; object-fit: cover; object-position: center;">
+                            <img id="modalImagen" class="img-fluid rounded" src="" alt="" style="height: 300px; width: 100%; object-fit: cover; object-position: center;">
                         </div>
                         
                         <!-- Columna derecha: Opciones -->
                         <div class="col-md-6">
                             <p id="modalDescripcion" class="text-muted mb-4"></p>
                             
-                            <div id="opcionesContainer" class="opciones-container mb-4">
+                            <div id="opcionesContainer" class="mb-4">
                                 <!-- Las opciones se cargarán dinámicamente aquí -->
                             </div>
                             
                             <!-- Selector de cantidad -->
                             <div class="form-group">
-                                <label><strong>Cantidad:</strong></label>
+                                <label><strong>Cantidad de paquetes:</strong></label>
                                 <div class="input-group mb-3" style="width: 150px;">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary" type="button" id="btnMenosCantidad">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="number" class="form-control text-center" id="cantidadProducto" value="1" min="1" max="10">
+                                    <input type="number" class="form-control text-center" id="cantidadPaquetes" value="1" min="1" max="10">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="btnMasCantidad">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
+                                <small class="text-muted">* Cada paquete contiene la cantidad seleccionada</small>
                             </div>
                             
                             <!-- Precio dinámico -->
@@ -478,78 +659,83 @@
             // Variables para el modal
             let productoActual = null;
             let opcionSeleccionada = null;
-            let cantidadProducto = 1;
+            let cantidadPaquetes = 1;
             
-            // Definir precios según las especificaciones
-            const precios = {
-                cheesecake_fresa: {
-                    nombre: "Cheesecake de Fresa",
-                    opciones: [
-                        {
-                            tipo: "entero",
-                            descripcion: "Cheesecake entero",
-                            precio: 28.00,
-                            unidad: "cheesecake"
-                        },
-                        {
-                            tipo: "porcion",
-                            descripcion: "Porción individual",
-                            precio: 7.00,
-                            unidad: "porción"
-                        }
-                    ]
-                },
-                cheesecake_maracuya: {
-                    nombre: "Cheesecake de Maracuyá",
-                    opciones: [
-                        {
-                            tipo: "entero",
-                            descripcion: "Cheesecake entero",
-                            precio: 28.00,
-                            unidad: "cheesecake"
-                        },
-                        {
-                            tipo: "porcion",
-                            descripcion: "Porción individual",
-                            precio: 7.00,
-                            unidad: "porción"
-                        }
-                    ]
-                }
+            // Precios según la tabla proporcionada
+            const preciosCompartir = {
+                "Mini alfajores": [
+                    { cantidad: 25, precio: 18 },
+                    { cantidad: 50, precio: 34 },
+                    { cantidad: 100, precio: 65 }
+                ],
+                "Mini brownies": [
+                    { cantidad: 25, precio: 20 },
+                    { cantidad: 50, precio: 38 },
+                    { cantidad: 100, precio: 72 }
+                ],
+                "Mini tartaletas": [
+                    { cantidad: 25, precio: 22 },
+                    { cantidad: 50, precio: 42 },
+                    { cantidad: 100, precio: 80 }
+                ],
+                "Mini triples jamón/pollo/durazno": [
+                    { cantidad: 25, precio: 30 },
+                    { cantidad: 50, precio: 55 },
+                    { cantidad: 100, precio: 105 }
+                ],
+                "Mini triples tocino": [
+                    { cantidad: 25, precio: 32 },
+                    { cantidad: 50, precio: 58 },
+                    { cantidad: 100, precio: 110 }
+                ],
+                "Petipán": [
+                    { cantidad: 25, precio: 28 },
+                    { cantidad: 50, precio: 52 },
+                    { cantidad: 100, precio: 100 }
+                ],
+                "Mini conitos con manjar": [
+                    { cantidad: 25, precio: 25 },
+                    { cantidad: 50, precio: 48 },
+                    { cantidad: 100, precio: 92 }
+                ],
+                "Mini mil hojas": [
+                    { cantidad: 25, precio: 28 },
+                    { cantidad: 50, precio: 55 },
+                    { cantidad: 100, precio: 105 }
+                ]
             };
             
             // Funcionalidad del carrito
-            let carrito = JSON.parse(localStorage.getItem('carritoPostres')) || [];
+            let carrito = JSON.parse(localStorage.getItem('carritoCompartir')) || [];
             
             // Actualizar contador inicial
             actualizarContadorCarrito();
             
             // Evento para abrir el modal
-            $(document).on('click', '.btn-seleccionar-opciones', function() {
-                const nombre = $(this).data('postre');
-                const tipo = $(this).data('tipo');
+            $(document).on('click', '.btn-seleccionar', function() {
+                const nombre = $(this).data('producto');
                 const imagen = $(this).data('imagen');
                 const descripcion = $(this).data('descripcion');
+                const categoria = $(this).data('categoria');
                 
                 productoActual = {
                     nombre: nombre,
-                    tipo: tipo,
                     imagen: imagen,
                     descripcion: descripcion,
-                    dataTipo: tipo
+                    categoria: categoria
                 };
                 
                 // Resetear cantidad
-                cantidadProducto = 1;
-                $('#cantidadProducto').val(1);
+                cantidadPaquetes = 1;
+                $('#cantidadPaquetes').val(1);
                 
                 // Llenar el modal
                 $('#modalTitulo').text(nombre);
                 $('#modalDescripcion').text(descripcion);
                 $('#modalImagen').attr('src', imagen);
                 
-                // Cargar opciones según el tipo
-                cargarOpciones(tipo);
+                // Cargar opciones según el producto
+                cargarOpciones(nombre);
                 
                 // Mostrar modal
                 $('#modalOpciones').modal('show');
@@ -557,55 +743,66 @@
             
             // Eventos para cambiar cantidad
             $('#btnMasCantidad').on('click', function() {
-                let valorActual = parseInt($('#cantidadProducto').val());
+                let valorActual = parseInt($('#cantidadPaquetes').val());
                 if (valorActual < 10) {
-                    cantidadProducto = valorActual + 1;
-                    $('#cantidadProducto').val(cantidadProducto);
+                    cantidadPaquetes = valorActual + 1;
+                    $('#cantidadPaquetes').val(cantidadPaquetes);
                     actualizarPrecioTotal();
                 }
             });
             
             $('#btnMenosCantidad').on('click', function() {
-                let valorActual = parseInt($('#cantidadProducto').val());
+                let valorActual = parseInt($('#cantidadPaquetes').val());
                 if (valorActual > 1) {
-                    cantidadProducto = valorActual - 1;
-                    $('#cantidadProducto').val(cantidadProducto);
+                    cantidadPaquetes = valorActual - 1;
+                    $('#cantidadPaquetes').val(cantidadPaquetes);
                     actualizarPrecioTotal();
                 }
             });
             
-            $('#cantidadProducto').on('change', function() {
-                cantidadProducto = parseInt($(this).val()) || 1;
-                if (cantidadProducto < 1) {
-                    cantidadProducto = 1;
+            $('#cantidadPaquetes').on('change', function() {
+                cantidadPaquetes = parseInt($(this).val()) || 1;
+                if (cantidadPaquetes < 1) {
+                    cantidadPaquetes = 1;
                     $(this).val(1);
                 }
-                if (cantidadProducto > 10) {
-                    cantidadProducto = 10;
+                if (cantidadPaquetes > 10) {
+                    cantidadPaquetes = 10;
                     $(this).val(10);
                 }
                 actualizarPrecioTotal();
             });
             
             // Función para cargar opciones
-            function cargarOpciones(tipo) {
+            function cargarOpciones(nombreProducto) {
                 const container = $('#opcionesContainer');
                 container.empty();
                 
-                if (precios[tipo]) {
-                    precios[tipo].opciones.forEach((opcion, index) => {
+                if (preciosCompartir[nombreProducto]) {
+                    preciosCompartir[nombreProducto].forEach((opcion, index) => {
+                        // Calcular ahorro por unidad comparado con comprar individualmente
+                        const precioPorUnidad = opcion.precio / opcion.cantidad;
+                        let descuentoTexto = '';
+                        
+                        if (opcion.cantidad === 50) {
+                            descuentoTexto = 'Mejor precio por unidad';
+                        } else if (opcion.cantidad === 100) {
+                            descuentoTexto = '¡Gran descuento!';
+                        }
+                        
                         const opcionHtml = `
                             <div class="opcion-item ${index === 0 ? 'selected' : ''}" 
-                                 data-index="${index}"
-                                 data-precio="${opcion.precio}"
-                                 data-tipo="${opcion.tipo}"
-                                 data-descripcion="${opcion.descripcion}"
-                                 data-unidad="${opcion.unidad}">
+                                data-index="${index}"
+                                data-precio="${opcion.precio}"
+                                data-cantidad="${opcion.cantidad}">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="opcion-titulo">${opcion.descripcion}</div>
+                                    <div>
+                                        <div class="opcion-titulo">${opcion.cantidad} unidades</div>
+                                        <div class="text-muted small">S/ ${(precioPorUnidad).toFixed(2)} por unidad</div>
+                                    </div>
                                     <div class="opcion-precio">S/ ${opcion.precio.toFixed(2)}</div>
                                 </div>
-                                ${opcion.ahorro ? `<div class="opcion-descripcion"><span class="badge-descuento">${opcion.ahorro}</span></div>` : ''}
+                                ${descuentoTexto ? `<div class="opcion-descripcion"><span class="badge-descuento">${descuentoTexto}</span></div>` : ''}
                             </div>
                         `;
                         container.append(opcionHtml);
@@ -613,11 +810,9 @@
                         // Seleccionar la primera opción por defecto
                         if (index === 0) {
                             opcionSeleccionada = {
-                                descripcion: opcion.descripcion,
+                                cantidadUnidades: opcion.cantidad,
                                 precio: opcion.precio,
-                                tipo: opcion.tipo,
-                                unidad: opcion.unidad,
-                                ahorro: opcion.ahorro || ''
+                                precioPorUnidad: precioPorUnidad
                             };
                             actualizarPrecioTotal();
                         }
@@ -630,12 +825,14 @@
                 $('.opcion-item').removeClass('selected');
                 $(this).addClass('selected');
                 
+                const cantidad = parseInt($(this).data('cantidad'));
+                const precio = parseFloat($(this).data('precio'));
+                const precioPorUnidad = precio / cantidad;
+                
                 opcionSeleccionada = {
-                    descripcion: $(this).data('descripcion'),
-                    precio: parseFloat($(this).data('precio')),
-                    tipo: $(this).data('tipo'),
-                    unidad: $(this).data('unidad'),
-                    ahorro: $(this).find('.badge-descuento').text() || ''
+                    cantidadUnidades: cantidad,
+                    precio: precio,
+                    precioPorUnidad: precioPorUnidad
                 };
                 
                 actualizarPrecioTotal();
@@ -643,15 +840,15 @@
             
             // Función para calcular precio total
             function actualizarPrecioTotal() {
-                if (!opcionSeleccionada) return;
+                if (!opcionSeleccionada || !productoActual) return;
                 
-                const precioTotal = opcionSeleccionada.precio * cantidadProducto;
+                const precioTotal = opcionSeleccionada.precio * cantidadPaquetes;
+                const totalUnidades = opcionSeleccionada.cantidadUnidades * cantidadPaquetes;
                 
                 // Actualizar detalles
-                let detalle = `${cantidadProducto} ${cantidadProducto === 1 ? opcionSeleccionada.unidad : opcionSeleccionada.unidad + 's'} de ${opcionSeleccionada.descripcion}`;
-                if (opcionSeleccionada.ahorro) {
-                    detalle += `<br><small class="text-success">${opcionSeleccionada.ahorro}</small>`;
-                }
+                let detalle = `${cantidadPaquetes} paquete${cantidadPaquetes > 1 ? 's' : ''} de ${opcionSeleccionada.cantidadUnidades} unidades`;
+                detalle += `<br><small>Total: ${totalUnidades} unidades</small>`;
+                detalle += `<br><small>Precio por unidad: S/ ${opcionSeleccionada.precioPorUnidad.toFixed(2)}</small>`;
                 
                 $('#detallePrecio').html(detalle);
                 $('#precioTotal').text(`S/ ${precioTotal.toFixed(2)}`);
@@ -664,14 +861,13 @@
                 // Crear objeto del producto con todas las opciones
                 const productoConOpciones = {
                     nombre: productoActual.nombre,
-                    precioTotal: (opcionSeleccionada.precio * cantidadProducto).toFixed(2),
-                    precioUnitario: opcionSeleccionada.precio.toFixed(2),
-                    descripcionOpcion: opcionSeleccionada.descripcion,
-                    tipoOpcion: opcionSeleccionada.tipo,
-                    unidad: opcionSeleccionada.unidad,
-                    cantidad: cantidadProducto,
-                    ahorro: opcionSeleccionada.ahorro,
-                    categoria: 'Cheesecakes',
+                    precioTotal: (opcionSeleccionada.precio * cantidadPaquetes).toFixed(2),
+                    precioPaquete: opcionSeleccionada.precio.toFixed(2),
+                    cantidadPaquetes: cantidadPaquetes,
+                    cantidadUnidadesPorPaquete: opcionSeleccionada.cantidadUnidades,
+                    totalUnidades: opcionSeleccionada.cantidadUnidades * cantidadPaquetes,
+                    precioPorUnidad: opcionSeleccionada.precioPorUnidad.toFixed(2),
+                    categoria: 'Compartir',
                     descripcion: productoActual.descripcion,
                     imagen: productoActual.imagen,
                     agregado: new Date().toISOString()
@@ -680,8 +876,8 @@
                 // Agregar al carrito
                 carrito.push(productoConOpciones);
                 
-                // Guardar en localStorage
-                localStorage.setItem('carritoPostres', JSON.stringify(carrito));
+                // Guardar en localStorage con el formato del carrito.html
+                localStorage.setItem('carritoCompartir', JSON.stringify(carrito));
                 
                 // Actualizar contador
                 actualizarContadorCarrito();
@@ -695,7 +891,7 @@
                 // Resetear variables
                 productoActual = null;
                 opcionSeleccionada = null;
-                cantidadProducto = 1;
+                cantidadPaquetes = 1;
             });
             
             // Función para mostrar notificación
@@ -721,8 +917,18 @@
             }
             
             function actualizarContadorCarrito() {
-                const contador = carrito.length;
-                $('.carrito-contador').text(contador);
+                // Sumar todos los carritos según la estructura del carrito.html
+                let contadorTotal = 0;
+                
+                // Lista completa de categorías según carrito.html
+                const todasCategorias = ['Postres', 'TortasPies', 'Cheesecakes', 'Salados', 'Cuchareables', 'Compartir'];
+                
+                todasCategorias.forEach(categoria => {
+                    const carritoCat = JSON.parse(localStorage.getItem(`carrito${categoria}`)) || [];
+                    contadorTotal += carritoCat.length;
+                });
+                
+                $('.carrito-contador').text(contadorTotal);
             }
             
             // Redirigir al carrito
@@ -735,7 +941,7 @@
                 $('#opcionesContainer').empty();
                 productoActual = null;
                 opcionSeleccionada = null;
-                cantidadProducto = 1;
+                cantidadPaquetes = 1;
             });
         });
     </script>
