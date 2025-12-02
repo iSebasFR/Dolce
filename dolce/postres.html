@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dolce - Postres</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="postres, tartaletas, cheesecakes, cupcakes, kekes" name="keywords">
+    <meta content="Deliciosos postres artesanales hechos con amor y los mejores ingredientes" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        .postre-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .postre-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+        
+        .postre-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .postre-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #F9A392;
+            color: white;
+        }
+        
+        .btn-agregar-carrito {
+            transition: all 0.3s;
+        }
+        
+        .btn-agregar-carrito:hover {
+            background-color: #f56649 !important;
+            border-color: #f56649 !important;
+        }
+        
+        .carrito-flotante {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .carrito-icono {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            background: #F9A392;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(249, 163, 146, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .carrito-icono:hover {
+            transform: scale(1.1);
+        }
+        
+        .carrito-contador {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #211E1C;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Franja rosa pastel para el encabezado */
+        .franja-postres {
+            background-color: #FEF1EF; /* Color light de tu paleta */
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            margin-top: 80px;
+        }
+        
+        .franja-contenido {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .franja-titulo {
+            color: #211E1C; /* Color dark de tu paleta */
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .franja-descripcion {
+            color: #757575; /* Color gris de tu paleta */
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Estilos para el modal de opciones */
+        .btn-group-toggle .btn {
+            border: 2px solid #dee2e6;
+        }
+
+        .btn-group-toggle .btn.active {
+            background-color: #F9A392;
+            border-color: #F9A392;
+            color: white;
+        }
+
+        .btn-group-toggle .btn:hover:not(.active) {
+            border-color: #F9A392;
+            color: #F9A392;
+        }
+
+        /* Input spinner personalizado */
+        .input-group .btn-outline-secondary {
+            border-color: #dee2e6;
+            color: #757575;
+        }
+
+        .input-group .btn-outline-secondary:hover {
+            background-color: #F9A392;
+            border-color: #F9A392;
+            color: white;
+        }
+
+        #cantidadUnidad {
+            border-left: none;
+            border-right: none;
+        }
+
+        /* Modal personalizado */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: #FEF1EF;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-title {
+            color: #211E1C;
+            font-weight: 600;
+        }
+
+        /* Estilos para opciones específicas */
+        .opciones-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .opcion-item {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .opcion-item:hover {
+            border-color: #F9A392;
+            background-color: #FEF1EF;
+        }
+
+        .opcion-item.selected {
+            border-color: #F9A392;
+            background-color: #FEF1EF;
+        }
+
+        .opcion-titulo {
+            font-weight: 600;
+            color: #211E1C;
+            margin-bottom: 5px;
+        }
+
+        .opcion-precio {
+            color: #F9A392;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .opcion-descripcion {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .badge-descuento {
+            background-color: #28a745;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+
+        .postre-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .postre-card .card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .postre-card .mt-4 {
+            margin-top: auto !important; 
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light d-none d-lg-block">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-primary"><span class="text-dark">Postres</span> D'Katherine</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Catálogo</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="postres.html" class="dropdown-item active">Postres</a>
+                            <a href="Tortas&Pies.html" class="dropdown-item">Tortas & Pies</a>
+                            <a href="cheesecakes.html" class="dropdown-item">Cheesecakes</a>
+                            <a href="salados.html" class="dropdown-item">Salados</a>
+                            <a href="cuchareables.html" class="dropdown-item">Cuchareables & Bandejas</a>
+                        </div>
+                    </div>
+                    <a href="carrito.html" class="nav-item nav-link">Carrito 🛒</a>
+                    <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Franja Postres Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="franja-postres">
+                <div class="franja-contenido">
+                    <h1 class="franja-titulo">Postres</h1>
+                    <p class="franja-descripcion">
+                        Cada postre está elaborado artesanalmente con ingredientes frescos y mucho amor. ¡Encuentra tu favorito!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Franja Postres End -->
+
+    <!-- Postres Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Postre 1: Brownie de oreo -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre6.jpg" alt="Brownie de oreo" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Brownie</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Brownie de oreo</h4>
+                            <p class="card-text text-muted flex-grow-1">Brownie húmedo con trozos de galleta Oreo</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Brownie de oreo" 
+                                        data-tipo="brownie_oreo"
+                                        data-imagen="img/postre6.jpg"
+                                        data-descripcion="Brownie húmedo con trozos de galleta Oreo">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 2: Alfajores -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre4.jpg" alt="Alfajores" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Alfajores</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Alfajores</h4>
+                            <p class="card-text text-muted flex-grow-1">Galletas suaves rellenas de manjar</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Alfajores" 
+                                        data-tipo="alfajores"
+                                        data-imagen="img/postre4.jpg"
+                                        data-descripcion="Galletas suaves rellenas de manjar">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 3: Alfajores bañados en chocolate -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre5.jpg" alt="Alfajores bañados en chocolate" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Alfajores</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Alfajores bañados en chocolate</h4>
+                            <p class="card-text text-muted flex-grow-1">Alfajores tradicionales cubiertos con chocolate derretido</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Alfajores bañados en chocolate" 
+                                        data-tipo="alfajores"
+                                        data-imagen="img/postre5.jpg"
+                                        data-descripcion="Alfajores tradicionales cubiertos con chocolate derretido">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 4: Cupcake de coco con salsa de caramelo -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre1.jpg" alt="Cupcake de coco con salsa de caramelo" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Cupcake</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Cupcake de coco con salsa de caramelo</h4>
+                            <p class="card-text text-muted flex-grow-1">Cupcake esponjoso de coco con un toque dulce de caramelo</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Cupcake de coco con salsa de caramelo" 
+                                        data-tipo="cupcakes"
+                                        data-imagen="img/postre1.jpg"
+                                        data-descripcion="Cupcake esponjoso de coco con un toque dulce de caramelo">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 5: Cupcake de piña colada -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre7.jpg" alt="Cupcake de piña colada" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Cupcake</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Cupcake de piña colada</h4>
+                            <p class="card-text text-muted flex-grow-1">Cupcake con sabor tropical a coco y piña</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Cupcake de piña colada" 
+                                        data-tipo="cupcakes"
+                                        data-imagen="img/postre7.jpg"
+                                        data-descripcion="Cupcake con sabor tropical a coco y piña">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 6: Cupcake red velvet con relleno de fresa -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre8.jpg" alt="Cupcake red velvet con relleno de fresa" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Cupcake</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Cupcake red velvet con relleno de fresa</h4>
+                            <p class="card-text text-muted flex-grow-1">Cupcake suave rojo con centro de fresa fresca</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Cupcake red velvet con relleno de fresa" 
+                                        data-tipo="cupcakes"
+                                        data-imagen="img/postre8.jpg"
+                                        data-descripcion="Cupcake suave rojo con centro de fresa fresca">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 7: Tartaleta de fresa -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre9.jpg" alt="Tartaleta de fresa" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Tartaleta</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Tartaleta de fresa</h4>
+                            <p class="card-text text-muted flex-grow-1">Base crocante con crema suave y fresas frescas</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Tartaleta de fresa" 
+                                        data-tipo="tartaletas"
+                                        data-imagen="img/postre9.jpg"
+                                        data-descripcion="Base crocante con crema suave y fresas frescas">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 8: Tartaleta de maracuyá -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/postre10.jpg" alt="Tartaleta de maracuyá" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Tartaleta</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Tartaleta de maracuyá</h4>
+                            <p class="card-text text-muted flex-grow-1">Crujiente y cremosa, con el sabor cítrico del maracuyá</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Tartaleta de maracuyá" 
+                                        data-tipo="tartaletas"
+                                        data-imagen="img/postre10.jpg"
+                                        data-descripcion="Crujiente y cremosa, con el sabor cítrico del maracuyá">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postre 9: Brownie normal -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="postre-card border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="https://images.unsplash.com/photo-1564355808539-22fda35bed7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Brownie" style="height: 280px; object-fit: cover; object-position: center;">
+                            <div class="postre-overlay">
+                                <div class="postre-badge">Brownie</div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4 d-flex flex-column">
+                            <h4 class="card-title">Brownie</h4>
+                            <p class="card-text text-muted flex-grow-1">Brownie clásico húmedo y delicioso</p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary btn-seleccionar-opciones w-100" 
+                                        data-postre="Brownie" 
+                                        data-tipo="brownie"
+                                        data-imagen="https://images.unsplash.com/photo-1564355808539-22fda35bed7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                        data-descripcion="Brownie clásico húmedo y delicioso">
+                                    <i class="fa fa-cog mr-2"></i>Seleccionar opciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Postres End -->
+
+    <!-- Footer Start -->
+    <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6 pr-lg-5 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mb-3 text-white"><span class="text-primary">Dolce</span></h1>
+                    </a>
+                    <p>Postres artesanales hechos con amor ❤️.  
+                    Especialista en tartaletas, cheesecakes, cupcakes y kekes caseros.
+                    Usamos ingredientes frescos y naturales para asegurar el mejor sabor en cada pedido.</p>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square" href="https://wa.me/51986556921"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <div class="row">
+                        <div class="col-sm-6 mb-5">
+                            <h5 class="text-white text-uppercase mb-4">Enlaces</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
+                                <a class="text-white-50 mb-2" href="about.html"><i class="fa fa-angle-right mr-2"></i>Sobre mí</a>
+                                <a class="text-white-50 mb-2" href="postres.html"><i class="fa fa-angle-right mr-2"></i>Catálogo</a>
+                                <a class="text-white-50 mb-2" href="carrito.html"><i class="fa fa-angle-right mr-2"></i>Carrito 🛒</a>
+                                <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contáctanos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-light border-top py-4" style="border-color: rgba(256, 256, 256, .15) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0 text-white">
+                        &copy; 2025 <a href="#" class="text-primary">Dolce</a>. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Carrito Flotante -->
+    <div class="carrito-flotante">
+        <div class="carrito-icono">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="carrito-contador">0</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Modal para seleccionar opciones -->
+    <div class="modal fade" id="modalOpciones" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="modalTitulo"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Columna izquierda: Imagen -->
+                        <div class="col-md-6 text-center">
+                            <img id="modalImagen" class="img-fluid rounded" src="" alt="" style="height: 320px; width: 100%; object-fit: cover; object-position: center;">
+                        </div>
+                        
+                        <!-- Columna derecha: Opciones -->
+                        <div class="col-md-6">
+                            <p id="modalDescripcion" class="text-muted mb-4"></p>
+                            
+                            <div id="opcionesContainer" class="opciones-container mb-4">
+                                <!-- Las opciones se cargarán dinámicamente aquí -->
+                            </div>
+                            
+                            <!-- Selector de cantidad -->
+                            <div class="form-group">
+                                <label><strong>Cantidad:</strong></label>
+                                <div class="input-group mb-3" style="width: 150px;">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnMenosCantidad">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="number" class="form-control text-center" id="cantidadProducto" value="1" min="1" max="20">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnMasCantidad">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Precio dinámico -->
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-0">Total:</h5>
+                                            <small id="detallePrecio" class="text-muted"></small>
+                                        </div>
+                                        <h3 class="text-primary mb-0" id="precioTotal">S/ 0.00</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                        <i class="fa fa-times mr-2"></i>Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAgregarModal">
+                        <i class="fa fa-shopping-cart mr-2"></i>Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Variables para el modal
+            let productoActual = null;
+            let opcionSeleccionada = null;
+            let cantidadProducto = 1;
+            
+            // Definir precios según las especificaciones
+            const precios = {
+                alfajores: {
+                    nombre: "Alfajores",
+                    opciones: [
+                        {
+                            tipo: "cajita",
+                            descripcion: "Cajita de 8 unidades",
+                            precio: 15.00,
+                            unidad: "cajita"
+                        }
+                    ]
+                },
+                brownie: {
+                    nombre: "Brownie",
+                    opciones: [
+                        {
+                            tipo: "unidad",
+                            descripcion: "1 unidad",
+                            precio: 5.00,
+                            unidad: "unidad"
+                        },
+                        {
+                            tipo: "cajita",
+                            descripcion: "Cajita de 4 unidades",
+                            precio: 15.00,
+                            unidad: "cajita",
+                            ahorro: "Ahorras S/ 5.00"
+                        }
+                    ]
+                },
+                brownie_oreo: {
+                    nombre: "Brownie de oreo",
+                    opciones: [
+                        {
+                            tipo: "unidad",
+                            descripcion: "1 unidad",
+                            precio: 6.00,
+                            unidad: "unidad"
+                        }
+                    ]
+                },
+                cupcakes: {
+                    nombre: "Cupcakes",
+                    opciones: [
+                        {
+                            tipo: "cajita_4",
+                            descripcion: "Cajita de 4 unidades",
+                            precio: 15.00,
+                            unidad: "cajita"
+                        },
+                        {
+                            tipo: "cajita_6",
+                            descripcion: "Cajita de 6 unidades",
+                            precio: 22.00,
+                            unidad: "cajita",
+                            ahorro: "S/ 3.00 menos por unidad"
+                        }
+                    ]
+                },
+                tartaletas: {
+                    nombre: "Tartaletas",
+                    opciones: [
+                        {
+                            tipo: "entero",
+                            descripcion: "Molde entero",
+                            precio: 22.00,
+                            unidad: "molde"
+                        },
+                        {
+                            tipo: "porcion",
+                            descripcion: "Porción individual",
+                            precio: 6.00,
+                            unidad: "porción"
+                        }
+                    ]
+                }
+            };
+            
+            // Funcionalidad del carrito
+            let carrito = JSON.parse(localStorage.getItem('carritoPostres')) || [];
+            
+            // Actualizar contador inicial
+            actualizarContadorCarrito();
+            
+            // Evento para abrir el modal
+            $(document).on('click', '.btn-seleccionar-opciones', function() {
+                const nombre = $(this).data('postre');
+                const tipo = $(this).data('tipo');
+                const imagen = $(this).data('imagen');
+                const descripcion = $(this).data('descripcion');
+                
+                productoActual = {
+                    nombre: nombre,
+                    tipo: tipo,
+                    imagen: imagen,
+                    descripcion: descripcion,
+                    dataTipo: tipo
+                };
+                
+                // Resetear cantidad
+                cantidadProducto = 1;
+                $('#cantidadProducto').val(1);
+                
+                // Llenar el modal
+                $('#modalTitulo').text(nombre);
+                $('#modalDescripcion').text(descripcion);
+                $('#modalImagen').attr('src', imagen);
+                
+                // Cargar opciones según el tipo
+                cargarOpciones(tipo);
+                
+                // Mostrar modal
+                $('#modalOpciones').modal('show');
+            });
+            
+            // Eventos para cambiar cantidad
+            $('#btnMasCantidad').on('click', function() {
+                let valorActual = parseInt($('#cantidadProducto').val());
+                if (valorActual < 20) {
+                    cantidadProducto = valorActual + 1;
+                    $('#cantidadProducto').val(cantidadProducto);
+                    actualizarPrecioTotal();
+                }
+            });
+            
+            $('#btnMenosCantidad').on('click', function() {
+                let valorActual = parseInt($('#cantidadProducto').val());
+                if (valorActual > 1) {
+                    cantidadProducto = valorActual - 1;
+                    $('#cantidadProducto').val(cantidadProducto);
+                    actualizarPrecioTotal();
+                }
+            });
+            
+            $('#cantidadProducto').on('change', function() {
+                cantidadProducto = parseInt($(this).val()) || 1;
+                if (cantidadProducto < 1) {
+                    cantidadProducto = 1;
+                    $(this).val(1);
+                }
+                if (cantidadProducto > 20) {
+                    cantidadProducto = 20;
+                    $(this).val(20);
+                }
+                actualizarPrecioTotal();
+            });
+            
+            // Función para cargar opciones
+            function cargarOpciones(tipo) {
+                const container = $('#opcionesContainer');
+                container.empty();
+                
+                if (precios[tipo]) {
+                    precios[tipo].opciones.forEach((opcion, index) => {
+                        const opcionHtml = `
+                            <div class="opcion-item ${index === 0 ? 'selected' : ''}" 
+                                data-index="${index}"
+                                data-precio="${opcion.precio}"
+                                data-tipo="${opcion.tipo}"
+                                data-descripcion="${opcion.descripcion}"
+                                data-unidad="${opcion.unidad}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="opcion-titulo">${opcion.descripcion}</div>
+                                    <div class="opcion-precio">S/ ${opcion.precio.toFixed(2)}</div>
+                                </div>
+                                ${opcion.ahorro ? `<div class="opcion-descripcion"><span class="badge-descuento">${opcion.ahorro}</span></div>` : ''}
+                            </div>
+                        `;
+                        container.append(opcionHtml);
+                        
+                        // Seleccionar la primera opción por defecto
+                        if (index === 0) {
+                            opcionSeleccionada = {
+                                descripcion: opcion.descripcion,
+                                precio: opcion.precio,
+                                tipo: opcion.tipo,
+                                unidad: opcion.unidad,
+                                ahorro: opcion.ahorro || ''
+                            };
+                            actualizarPrecioTotal();
+                        }
+                    });
+                }
+            }
+            
+            // Evento para seleccionar opción
+            $(document).on('click', '.opcion-item', function() {
+                $('.opcion-item').removeClass('selected');
+                $(this).addClass('selected');
+                
+                opcionSeleccionada = {
+                    descripcion: $(this).data('descripcion'),
+                    precio: parseFloat($(this).data('precio')),
+                    tipo: $(this).data('tipo'),
+                    unidad: $(this).data('unidad'),
+                    ahorro: $(this).find('.badge-descuento').text() || ''
+                };
+                
+                actualizarPrecioTotal();
+            });
+            
+            // Función para calcular precio total
+            function actualizarPrecioTotal() {
+                if (!opcionSeleccionada) return;
+                
+                const precioTotal = opcionSeleccionada.precio * cantidadProducto;
+                
+                // Actualizar detalles
+                let detalle = `${cantidadProducto} ${cantidadProducto === 1 ? opcionSeleccionada.unidad : opcionSeleccionada.unidad + 's'} de ${opcionSeleccionada.descripcion}`;
+                if (opcionSeleccionada.ahorro) {
+                    detalle += `<br><small class="text-success">${opcionSeleccionada.ahorro}</small>`;
+                }
+                
+                $('#detallePrecio').html(detalle);
+                $('#precioTotal').text(`S/ ${precioTotal.toFixed(2)}`);
+            }
+            
+            // Evento para agregar al carrito desde el modal
+            $('#btnAgregarModal').on('click', function() {
+                if (!productoActual || !opcionSeleccionada) return;
+                
+                // Crear objeto del producto con todas las opciones
+                const productoConOpciones = {
+                    nombre: productoActual.nombre,
+                    precioTotal: (opcionSeleccionada.precio * cantidadProducto).toFixed(2),
+                    precioUnitario: opcionSeleccionada.precio.toFixed(2),
+                    descripcionOpcion: opcionSeleccionada.descripcion,
+                    tipoOpcion: opcionSeleccionada.tipo,
+                    unidad: opcionSeleccionada.unidad,
+                    cantidad: cantidadProducto,
+                    ahorro: opcionSeleccionada.ahorro,
+                    categoria: 'Postres',
+                    descripcion: productoActual.descripcion,
+                    imagen: productoActual.imagen,
+                    agregado: new Date().toISOString()
+                };
+                
+                // Agregar al carrito
+                carrito.push(productoConOpciones);
+                
+                // Guardar en localStorage
+                localStorage.setItem('carritoPostres', JSON.stringify(carrito));
+                
+                // Actualizar contador
+                actualizarContadorCarrito();
+                
+                // Cerrar modal
+                $('#modalOpciones').modal('hide');
+                
+                // Mostrar notificación
+                mostrarNotificacion('¡Producto agregado al carrito!');
+                
+                // Resetear variables
+                productoActual = null;
+                opcionSeleccionada = null;
+                cantidadProducto = 1;
+            });
+            
+            // Función para mostrar notificación
+            function mostrarNotificacion(mensaje) {
+                // Crear notificación
+                const $notificacion = $(`
+                    <div class="alert alert-success alert-dismissible fade show" 
+                        style="position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 300px;">
+                        <i class="fa fa-check-circle mr-2"></i>${mensaje}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                `);
+                
+                // Agregar al body
+                $('body').append($notificacion);
+                
+                // Auto-eliminar después de 3 segundos
+                setTimeout(() => {
+                    $notificacion.alert('close');
+                }, 3000);
+            }
+            
+            function actualizarContadorCarrito() {
+                const contador = carrito.length;
+                $('.carrito-contador').text(contador);
+            }
+            
+            // Redirigir al carrito
+            $('.carrito-icono').on('click', function() {
+                window.location.href = 'carrito.html';
+            });
+            
+            // Resetear modal al cerrar
+            $('#modalOpciones').on('hidden.bs.modal', function() {
+                $('#opcionesContainer').empty();
+                productoActual = null;
+                opcionSeleccionada = null;
+                cantidadProducto = 1;
+            });
+        });
+    </script>
+</body>
+
+</html>

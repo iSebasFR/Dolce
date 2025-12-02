@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dolce - Carrito</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="carrito, comprar, postres, pedido, delivery" name="keywords">
+    <meta content="Revisa y completa tu pedido de postres artesanales" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        .carrito-header {
+            background-color: #FEF1EF;
+            padding: 30px 0;
+            border-radius: 10px;
+            margin-top: 80px;
+            margin-bottom: 40px;
+        }
+        
+        .carrito-title {
+            color: #211E1C;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .carrito-subtitle {
+            color: #757575;
+            font-size: 1.1rem;
+        }
+        
+        .carrito-item {
+            border: 1px solid #FEF1EF;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .carrito-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .item-cantidad {
+            width: 70px;
+            text-align: center;
+        }
+        
+        .btn-cantidad {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        
+        .resumen-pedido {
+            background-color: #FEF1EF;
+            border-radius: 10px;
+            padding: 25px;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .resumen-title {
+            color: #211E1C;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F9A392;
+        }
+        
+        .resumen-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #757575;
+        }
+        
+        .resumen-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #211E1C;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #F9A392;
+        }
+        
+        .carrito-vacio {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .carrito-vacio-icon {
+            font-size: 4rem;
+            color: #F9A392;
+            margin-bottom: 20px;
+        }
+        
+        .btn-eliminar {
+            color: #dc3545;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .btn-eliminar:hover {
+            color: #bd2130;
+        }
+        
+        .metodo-pago {
+            margin-top: 25px;
+        }
+        
+        .metodo-pago-item {
+            padding: 15px;
+            border: 2px solid #FEF1EF;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .metodo-pago-item:hover,
+        .metodo-pago-item.active {
+            border-color: #F9A392;
+            background-color: rgba(249, 163, 146, 0.05);
+        }
+        
+        .pasos-pedido {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .paso {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .paso-numero {
+            width: 40px;
+            height: 40px;
+            background-color: #FEF1EF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 600;
+            color: #757575;
+        }
+        
+        .paso.activo .paso-numero {
+            background-color: #F9A392;
+            color: white;
+        }
+        
+        .paso-texto {
+            font-size: 0.9rem;
+            color: #757575;
+        }
+        
+        .paso.activo .paso-texto {
+            color: #211E1C;
+            font-weight: 600;
+        }
+        
+        .paso::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #FEF1EF;
+            z-index: -1;
+        }
+        
+        .paso:last-child::after {
+            display: none;
+        }
+        
+        .seccion-pedido {
+            display: none;
+        }
+        
+        .seccion-pedido.activo {
+            display: block;
+        }
+
+        .resumen-pedido,
+        .resumen-pedido .resumen-item span,
+        .resumen-pedido #subtotal,
+        .resumen-pedido #total-pagar {
+            font-size: 0.9rem !important;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light d-none d-lg-block">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-primary"><span class="text-dark">Postres</span> D'Katherine</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Catálogo</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="postres.html" class="dropdown-item">Postres</a>
+                            <a href="Tortas&Pies.html" class="dropdown-item">Tortas & Pies</a>
+                            <a href="cheesecakes.html" class="dropdown-item">Cheesecakes</a>
+                            <a href="salados.html" class="dropdown-item">Salados</a>
+                            <a href="cuchareables.html" class="dropdown-item">Cuchareables & Bandejas</a>
+                        </div>
+                    </div>
+                    <a href="carrito.html" class="nav-item nav-link active">Carrito 🛒</a>
+                    <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Encabezado Carrito Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="carrito-header text-center">
+                <h1 class="carrito-title">Tu Carrito de Compras</h1>
+                <p class="carrito-subtitle">Revisa y completa tu pedido de postres artesanales</p>
+            </div>
+        </div>
+    </div>
+    <!-- Encabezado Carrito End -->
+
+    <!-- Contenido Principal Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Columna Izquierda - Productos en Carrito -->
+                <div class="col-lg-8">
+                    <div id="carrito-vacio" class="carrito-vacio" style="display: none;">
+                        <div class="carrito-vacio-icon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="mb-3">Tu carrito está vacío</h3>
+                        <p class="text-muted mb-4">Agrega productos deliciosos para empezar tu pedido</p>
+                        <a href="postres.html" class="btn btn-primary">Ver Catálogo</a>
+                    </div>
+                    
+                    <div id="carrito-contenido">
+                        <h3 class="mb-4">Productos en tu carrito</h3>
+                        <div id="lista-productos">
+                            <!-- Los productos se cargarán dinámicamente aquí -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Columna Derecha - Resumen del Pedido -->
+                <div class="col-lg-4">
+                    <div class="resumen-pedido">
+                        <h4 class="resumen-title">Resumen del Pedido</h4>
+                        
+                        <div id="resumen-items">
+                            <!-- Los items del resumen se cargarán dinámicamente aquí -->
+                        </div>
+                        
+                        <div class="resumen-item">
+                            <span>Subtotal</span>
+                            <span id="subtotal">S/ 0.00</span>
+                        </div>
+                        
+                        <div class="resumen-total">
+                            <span>Total a pagar</span>
+                            <span id="total-pagar">S/ 0.00</span>
+                        </div>
+                        
+                        <!-- Botón de WhatsApp -->
+                        <div class="mt-4">
+                            <button id="btn-whatsapp" class="btn btn-success btn-block btn-lg" style="display: none;">
+                                <i class="fab fa-whatsapp mr-2"></i> Pagar por WhatsApp
+                            </button>
+                            
+                            <div class="mt-3">
+                                <a href="postres.html" class="btn btn-outline-primary btn-block">
+                                    <i class="fa fa-arrow-left mr-2"></i> Seguir Comprando
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contenido Principal End -->
+
+    <!-- Footer Start -->
+    <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6 pr-lg-5 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mb-3 text-white"><span class="text-primary">Dolce</span></h1>
+                    </a>
+                    <p>Postres artesanales hechos con amor ❤️.  
+                    Especialista en tartaletas, cheesecakes, cupcakes y kekes caseros.
+                    Usamos ingredientes frescos y naturales para asegurar el mejor sabor en cada pedido.</p>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square" href="https://wa.me/51986556921"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <div class="row">
+                        <div class="col-sm-6 mb-5">
+                            <h5 class="text-white text-uppercase mb-4">Enlaces</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
+                                <a class="text-white-50 mb-2" href="about.html"><i class="fa fa-angle-right mr-2"></i>Sobre mí</a>
+                                <a class="text-white-50 mb-2" href="postres.html"><i class="fa fa-angle-right mr-2"></i>Catálogo</a>
+                                <a class="text-white-50 mb-2" href="carrito.html"><i class="fa fa-angle-right mr-2"></i>Carrito 🛒</a>
+                                <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contáctanos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-light border-top py-4" style="border-color: rgba(256, 256, 256, .15) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0 text-white">
+                        &copy; 2025 <a href="#" class="text-primary">Dolce</a>. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            let carritoCompleto = [];
+            let subtotal = 0;
+            const costoDelivery = 0;
+            const pedidoMinimo = 0;
+            const telefonoWhatsapp = "51986556921";
+
+            // -----------------------------
+            // CARGAR CARRITO DESDE STORAGE
+            // -----------------------------
+
+            function cargarCarritoCompleto() {
+                carritoCompleto = [];
+                const categorias = ['Postres', 'TortasPies', 'Cheesecakes', 'Salados', 'Cuchareables'];
+
+                categorias.forEach(categoria => {
+                    const data = localStorage.getItem(`carrito${categoria}`);
+
+                    if (data) {
+                        try {
+                            const productos = JSON.parse(data);
+                            productos.forEach(p => {
+                                if (!p.categoria) p.categoria = categoria;
+                                if (!p.cantidad) p.cantidad = 1;
+                                if (!p.precioUnitario) p.precioUnitario = parseFloat(p.precio) || 0;
+                            });
+                            carritoCompleto.push(...productos);
+                        } catch (e) {
+                            console.error("Error cargando carrito:", e);
+                        }
+                    }
+                });
+
+                actualizarVistaCarrito();
+            }
+
+            // -----------------------------
+            // ACTUALIZAR VISTA DEL CARRITO
+            // -----------------------------
+
+            function actualizarVistaCarrito() {
+                const $lista = $('#lista-productos');
+                const $resumen = $('#resumen-items');
+                const $vacio = $('#carrito-vacio');
+                const $contenido = $('#carrito-contenido');
+                const $btnWhats = $('#btn-whatsapp');
+
+                subtotal = 0;
+                $lista.empty();
+                $resumen.empty();
+
+                if (carritoCompleto.length === 0) {
+                    $vacio.show();
+                    $contenido.hide();
+                    $btnWhats.hide();
+                    return;
+                }
+
+                $vacio.hide();
+                $contenido.show();
+
+                carritoCompleto.forEach((prod, index) => {
+
+                    const precioUnitario = parseFloat(prod.precioUnitario || 0);
+                    const cantidad = parseInt(prod.cantidad);
+                    const totalItem = precioUnitario * cantidad;
+
+                    subtotal += totalItem;
+
+                    // Texto tipo opción
+                    let tipoTxt = prod.descripcionOpcion || prod.tipoOpcion || "Unidad";
+
+                    // ---- LISTA IZQUIERDA (productos del carrito)
+                    $lista.append(`
+                        <div class="carrito-item" data-index="${index}">
+                            <div class="row align-items-center">
+
+                                <div class="col-md-8">
+                                    <h6 class="mb-1">${prod.nombre}</h6>
+                                    <small class="text-muted">
+                                        ${cantidad} ${cantidad === 1 ? 'unidad' : 'unidades'} – ${tipoTxt}
+                                    </small>
+                                    <p class="text-muted mb-0 small">${prod.categoria}</p>
+                                </div>
+
+                                <div class="col-md-3 text-right">
+                                    <h6 class="mb-0">S/ ${totalItem.toFixed(2)}</h6>
+                                </div>
+
+                                <div class="col-md-1 text-right">
+                                    <button class="btn-eliminar" data-index="${index}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                    // ---- RESUMEN LATERAL
+                    $resumen.append(`
+                        <div class="resumen-item">
+                            <span>${cantidad}× ${prod.nombre} (${tipoTxt})</span>
+                            <span>S/ ${totalItem.toFixed(2)}</span>
+                        </div>
+                    `);
+                });
+
+                // Totales
+                const total = subtotal + costoDelivery;
+
+                $('#subtotal').text(`S/ ${subtotal.toFixed(2)}`);
+                $('#total-pagar').text(`S/ ${total.toFixed(2)}`);
+
+                // botón WhatsApp siempre visible
+                $btnWhats.show();
+            }
+
+            // -----------------------------------
+            // ELIMINAR PRODUCTO DEL CARRITO
+            // -----------------------------------
+
+            $(document).on("click", ".btn-eliminar", function () {
+                const index = $(this).data("index");
+                carritoCompleto.splice(index, 1);
+                actualizarLocalStorage();
+                actualizarVistaCarrito();
+            });
+
+            // -----------------------------------
+            // GUARDAR CAMBIOS EN LOCALSTORAGE
+            // -----------------------------------
+
+            function actualizarLocalStorage() {
+                const porCategoria = {};
+
+                carritoCompleto.forEach(prod => {
+                    if (!porCategoria[prod.categoria])
+                        porCategoria[prod.categoria] = [];
+
+                    porCategoria[prod.categoria].push(prod);
+                });
+
+                Object.keys(porCategoria).forEach(cat => {
+                    localStorage.setItem(`carrito${cat}`, JSON.stringify(porCategoria[cat]));
+                });
+
+                // limpiar categorías vacías
+                ['Postres', 'TortasPies', 'Cheesecakes', 'Salados', 'Cuchareables'].forEach(cat => {
+                    if (!porCategoria[cat] || porCategoria[cat].length === 0) {
+                        localStorage.removeItem(`carrito${cat}`);
+                    }
+                });
+            }
+
+            // -----------------------------------
+            // GENERAR MENSAJE DE WHATSAPP
+            // -----------------------------------
+
+            function generarMensajeWhatsApp() {
+                let msg = "Hola Katherine👋,\nQuiero confirmar mi pedido:\n\n";
+
+                carritoCompleto.forEach(prod => {
+                    const precioU = parseFloat(prod.precioUnitario || 0);
+                    const total = precioU * prod.cantidad;
+                    const tipo = prod.descripcionOpcion || prod.tipoOpcion || '';
+
+                    msg += `• ${prod.nombre} (${tipo}) x${prod.cantidad}: S/ ${total.toFixed(2)}\n`;
+                });
+
+                msg += `\nSubtotal: S/ ${subtotal.toFixed(2)}`;
+                msg += `\nTotal: S/ ${subtotal.toFixed(2)}`;
+                msg += `\n\n¿Me confirmas la fecha estimada de entrega?`;
+
+                return encodeURIComponent(msg);
+            }
+
+            $('#btn-whatsapp').on("click", function () {
+                const mensaje = generarMensajeWhatsApp();
+                window.open(`https://wa.me/${telefonoWhatsapp}?text=${mensaje}`, "_blank");
+            });
+
+            // Cargar carrito al iniciar
+            cargarCarritoCompleto();
+
+        });
+        </script>
+
+</body>
+
+</html>
