@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dolce - Sobre nosotros</title>
+    <title>Dolce - Sobre Nosotros</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -25,6 +25,296 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Estilos adicionales para about.html */
+        .hero-gradient {
+            background: linear-gradient(135deg, #F9A392 0%, #6EBBF6 100%);
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(33, 30, 28, 0.15);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #F9A392, #6EBBF6);
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F9A392;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+        
+        .ingredient-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(249, 163, 146, 0.2);
+        }
+        
+        .ingredient-card:hover {
+            border-color: #F9A392;
+            transform: scale(1.05);
+        }
+        
+        .ingredient-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #F9A392, #6EBBF6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        /* Carrusel Marquee Multilínea MODIFICADO */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #FEF1EF 0%, #fff 50%, #FEF1EF 100%);
+        }
+        
+        .marquee-track {
+            display: flex;
+            animation: marquee 40s linear infinite;
+            will-change: transform;
+        }
+        
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .marquee-item {
+            flex: 0 0 auto;
+            margin: 0 10px;
+            width: 180px; /* Más pequeño */
+            height: 180px; /* Más pequeño */
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .marquee-item:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(249, 163, 146, 0.25);
+            z-index: 10;
+        }
+        
+        .marquee-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .marquee-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Efecto de borde degradado */
+        .marquee-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 3px;
+            background: linear-gradient(45deg, #F9A392, #6EBBF6, #F9A392);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .marquee-item:hover:before {
+            opacity: 1;
+        }
+        
+        /* Sombra interna para efecto de profundidad */
+        .marquee-item:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(33, 30, 28, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .marquee-item:hover:after {
+            opacity: 1;
+        }
+        
+        .marquee-row {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .marquee-reverse {
+            animation-direction: reverse;
+        }
+        
+        .marquee-slow {
+            animation-duration: 50s;
+        }
+        
+        .marquee-fast {
+            animation-duration: 35s;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Header con imagen de fondo */
+        .custom-header-bg {
+            background: linear-gradient(rgba(33, 30, 28, 0.7), rgba(33, 30, 28, 0.7)), var(--header-image) no-repeat center center;
+            background-size: cover;
+            --header-image: url('img/header-bg.jpg');
+        }
+        
+        /* CTA con imagen de fondo sombreada */
+        .cta-bg {
+            background: linear-gradient(rgba(33, 30, 28, 0.85), rgba(33, 30, 28, 0.85)), var(--cta-image) no-repeat center center;
+            background-size: cover;
+            --cta-image: url('img/cta-bg.jpg');
+        }
+        
+        /* Estilos para el nuevo proceso de trabajo */
+        .process-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .process-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #F9A392, #6EBBF6);
+        }
+        
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(249, 163, 146, 0.15);
+        }
+        
+        .process-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #F9A392, #6EBBF6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        /* Estilos para la galería */
+        .gallery-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(254, 241, 239, 0.9) 0%, transparent 20%, transparent 80%, rgba(254, 241, 239, 0.9) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        @media (max-width: 768px) {
+            .marquee-item {
+                width: 140px;
+                height: 140px;
+                margin: 0 8px;
+            }
+            
+            .marquee-row {
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .marquee-item {
+                width: 120px;
+                height: 120px;
+                margin: 0 6px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -53,7 +343,6 @@
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
@@ -68,10 +357,10 @@
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
                     <a href="about.html" class="nav-item nav-link active">Sobre nosotros</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Catálogo</a>
+                        <a href="catalogo.html" class="nav-link">Catálogo</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="postres.html" class="dropdown-item">Postres</a>
-                            <a href="Tortas&Pies.html" class="dropdown-item">Tortas & Pies</a>
+                            <a href="tortas.html" class="dropdown-item">Tortas & Pies</a>
                             <a href="cheesecakes.html" class="dropdown-item">Cheesecakes</a>
                             <a href="salados.html" class="dropdown-item">Salados</a>
                             <a href="cuchareables.html" class="dropdown-item">Cuchareables & Bandejas</a>
@@ -86,39 +375,300 @@
     </div>
     <!-- Navbar End -->
 
-
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid bg-jumbotron" style="margin-bottom: 90px;">
-        <div class="container text-center py-5">
-            <h3 class="text-white display-3 mb-4">Sobre nosotros</h3>
-            <div class="d-inline-flex align-items-center text-white">
-                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+    <!-- Hero Section Start CON IMAGEN DE FONDO -->
+    <div class="jumbotron jumbotron-fluid position-relative overflow-hidden custom-header-bg" style="margin-bottom: 90px; min-height: 400px;">
+        <div class="container text-center py-5 position-relative" style="z-index: 2;">
+            <h3 class="text-white display-3 mb-4 animate__animated animate__fadeInDown animate__delay-0.5s">Nuestra Historia</h3>
+            <div class="d-inline-flex align-items-center text-white animate__animated animate__fadeInUp animate__delay-1s">
+                <p class="m-0"><a class="text-white" href="index.html">Inicio</a></p>
                 <i class="far fa-circle px-3"></i>
                 <p class="m-0">Sobre nosotros</p>
             </div>
         </div>
     </div>
-    <!-- Header End -->
+    <!-- Hero Section End -->
 
-
-    <!-- About Start -->
+    <!-- About Founder -->
     <div class="container-fluid py-5">
-        <div class="container py-5">
+        <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100" src="img/about.jpg" alt="">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100 rounded-lg shadow-lg animate__animated animate__fadeInLeft" src="img/about.jpg" alt="Katherine Fernández" style="transform: perspective(1000px) rotateY(-10deg); transition: transform 0.5s ease;">
+                        <div class="position-absolute bottom-0 left-0 p-4 bg-white rounded-tr-lg shadow-lg">
+                            <h5 class="text-primary mb-0">Katherine Fernández</h5>
+                            <small class="text-muted">Fundadora & Pastelera Principal</small>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6">
-                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">Sobre nosotros</h6>
-                    <h1 class="mb-4">XD</h1>
-                    <p class="pl-4 border-left border-primary">ok</p>
+                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2 animate__animated animate__fadeIn">Mi Historia</h6>
+                    <h1 class="mb-4 animate__animated animate__fadeIn animate__delay-0.5s">Pasión Convertida en Arte Dulce</h1>
+                    <div class="pl-4 border-left border-primary animate__animated animate__fadeIn animate__delay-1s">
+                        <p class="mb-4">Soy Katherine Fernández, pastelera formada en el reconocido Instituto Gastronómico D'Gallia - Lima, Perú. Desde niña, encontré en la cocina un espacio de creatividad y amor, pero fue durante mi formación profesional donde descubrí que la repostería era mi verdadera vocación.</p>
+                        <p class="mb-4">Lo que comenzó como un pequeño emprendimiento desde casa, hoy se ha convertido en un referente de postres artesanales en Lima. Cada creación es una extensión de mi pasión, donde combino técnicas tradicionales con un toque innovador y contemporáneo.</p>
+                        <p class="mb-4">Creo firmemente que un buen postre no solo debe deleitar el paladar, sino también despertar emociones y crear momentos memorables.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- About End -->
 
+    <!-- Nuevo: Nuestro Proceso de Trabajo -->
+    <div class="container-fluid py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h6 class="d-inline-block text-primary text-uppercase bg-white py-1 px-2">Cómo Trabajamos</h6>
+                    <h1 class="mb-4">El Proceso Creativo</h1>
+                    <p class="text-muted">Cada postre pasa por un cuidadoso proceso de creación</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-card hover-lift">
+                        <div class="process-icon mx-auto">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Concepto & Diseño</h4>
+                        <p class="text-muted text-center">Analizamos tu pedido y creamos un concepto único que combine sabor y presentación.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-card hover-lift">
+                        <div class="process-icon mx-auto">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Selección de Ingredientes</h4>
+                        <p class="text-muted text-center">Escogemos ingredientes frescos y de la más alta calidad en el mercado local.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-card hover-lift">
+                        <div class="process-icon mx-auto">
+                            <i class="fas fa-blender"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Elaboración Artesanal</h4>
+                        <p class="text-muted text-center">Cada pieza es creada a mano con técnicas tradicionales y atención meticulosa.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-card hover-lift">
+                        <div class="process-icon mx-auto">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Presentación & Entrega</h4>
+                        <p class="text-muted text-center">Empacamos con cuidado y entregamos manteniendo la frescura y presentación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Gallery Marquee Multilínea MODIFICADO - 3 FILAS, SOLO IMÁGENES -->
+    <div class="container-fluid py-5 gallery-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">Nuestras Creaciones</h6>
+                    <h1 class="mb-4">Galería de Postres</h1>
+                    <p class="text-muted">Desliza para ver nuestra colección de delicias</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overlay para degradado en los bordes -->
+        <div class="gallery-overlay"></div>
+        
+        <!-- Fila 1 del Marquee - Velocidad normal -->
+        <div class="marquee-container">
+            <div class="marquee-row">
+                <div class="marquee-track" id="marquee-track-1">
+                    <!-- Solo imágenes, sin texto -->
+                    <div class="marquee-item">
+                        <img src="img/postre1.jpg" alt="Tartaletas de Frutos Rojos">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre2.jpg" alt="Cheesecake New York">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre3.jpg" alt="Macarons Artesanales">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre4.jpg" alt="Eclairs de Chocolate">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre5.jpg" alt="Torta Red Velvet">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre6.jpg" alt="Profiteroles">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre7.jpg" alt="Brownie con Helado">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre8.jpg" alt="Tarta de Manzana">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/postre9.jpg" alt="Mousse de Chocolate">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fila 2 del Marquee - Dirección inversa, velocidad lenta -->
+            <div class="marquee-row">
+                <div class="marquee-track marquee-reverse marquee-slow" id="marquee-track-2">
+                    <div class="marquee-item">
+                        <img src="img/compartir1.jpg" alt="Cupcakes Decorados">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir2.jpg" alt="Tiramisú Clásico">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir3.jpg" alt="Panna Cotta">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir4.jpg" alt="Crème Brûlée">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir5.jpg" alt="Opera Cake">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir6.jpg" alt="Lemon Pie">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/compartir7.jpg" alt="Chocolate Soufflé">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/bandeja1.jpg" alt="Fruit Tart">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/bandeja2.jpg" alt="Carrot Cake">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fila 3 del Marquee - Dirección normal, velocidad rápida -->
+            <div class="marquee-row">
+                <div class="marquee-track marquee-fast" id="marquee-track-3">
+                    <div class="marquee-item">
+                        <img src="img/bandeja3.jpg" alt="Pavlova">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/bandeja4.jpg" alt="Matcha Cake">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/copa1.jpg" alt="Raspberry Tart">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/copa2.jpg" alt="Chocolate Mille Feuille">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/copa3.jpg" alt="Strawberry Shortcake">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/copa4.jpg" alt="Blueberry Cheesecake">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/salado1.jpg" alt="Tartaletas de Frutos Rojos">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/salado3.jpg" alt="Cheesecake New York">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="img/salado4.jpg" alt="Macarons Artesanales">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="container-fluid py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h6 class="d-inline-block text-primary text-uppercase bg-white py-1 px-2">Nuestro Viaje</h6>
+                    <h1 class="mb-4">Camino Recorrido</h1>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="text-primary">2020</h4>
+                            <h5>Graduación en D'Gallia</h5>
+                            <p>Completé mi formación profesional en el prestigioso Instituto Gastronómico D'Gallia, especializándome en repostería y pastelería.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="text-primary">2021</h4>
+                            <h5>Primeros Pedidos desde Casa</h5>
+                            <p>Inicié mi emprendimiento preparando tartaletas y cheesecakes para familiares y amigos cercanos. La calidad y sabor hicieron que el boca a boca funcionara.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="text-primary">2022</h4>
+                            <h5>Expansión y Diversificación</h5>
+                            <p>Añadí nuevas líneas de productos: cupcakes decorados, kekes personalizados y postres salados. La cartera de clientes creció exponencialmente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="text-primary">2023</h4>
+                            <h5>Reconocimiento Local</h5>
+                            <p>Fui reconocida como una de las mejores pastelerías caseras de Lima, destacando por la innovación en sabores y presentaciones.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="text-primary">2024 - Actualidad</h4>
+                            <h5>Consolidación y Futuro</h5>
+                            <p>Continuamos innovando con nuevos productos, manteniendo la calidad artesanal y expandiendo nuestro alcance a través de pedidos online y eventos especiales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section CON IMAGEN DE FONDO -->
+    <div class="container-fluid py-5 cta-bg">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-center text-lg-left">
+                    <h1 class="text-white mb-4">¿Listo para Endulzar tu Día?</h1>
+                    <p class="text-white mb-4">Déjame crear el postre perfecto para tus momentos especiales. Cada pedido es personalizado con amor y atención a los detalles.</p>
+                </div>
+                <div class="col-lg-5 text-center text-lg-right">
+                    <a href="catalogo.html" class="btn btn-primary btn-lg py-3 px-5 animate__animated animate__pulse animate__infinite">¡Haz tu Pedido Ahora!</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
@@ -126,13 +676,13 @@
             <div class="row">
                 <div class="col-lg-6 pr-lg-5 mb-5">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="mb-3 text-white"><span class="text-primary">Dolce</span></h1>
+                        <h1 class="mb-3 text-white"><span class="text-primary">Postres D'Katherine</span></h1>
                     </a>
-                    <p>Postres artesanales hechos con amor ❤️.  
+                    <p class="text-white-50">Postres artesanales hechos con amor ❤️.  
                     Especialista en tartaletas, cheesecakes, cupcakes y kekes caseros.
                     Usamos ingredientes frescos y naturales para asegurar el mejor sabor en cada pedido.</p>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
-                    <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
+                    <p class="text-white-50"><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    <p class="text-white-50"><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
                     <div class="d-flex justify-content-start mt-4">
                         <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
@@ -161,7 +711,7 @@
             <div class="row">
                 <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                     <p class="m-0 text-white">
-                        &copy; 2025 <a href="#" class="text-primary">Dolce</a>. Todos los derechos reservados.
+                        &copy; 2025 <a href="#" class="text-primary">Postres D'Katherine</a>. Todos los derechos reservados.
                     </p>
                 </div>
             </div>
@@ -169,10 +719,8 @@
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -185,12 +733,110 @@
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        // Animaciones al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto fade-in al hacer scroll
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            // Ejecutar al cargar y al hacer scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll();
+            
+            // Efecto de parallax en la imagen del fundador
+            const founderImage = document.querySelector('.col-lg-6 img');
+            if (founderImage) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+                    founderImage.style.transform = `perspective(1000px) rotateY(-10deg) translateY(${rate}px)`;
+                });
+            }
+            
+            // Configuración del Marquee multilínea MODIFICADO
+            function setupMarquee() {
+                const tracks = document.querySelectorAll('.marquee-track');
+                
+                tracks.forEach(track => {
+                    // Duplicar los items para efecto continuo
+                    const items = track.innerHTML;
+                    track.innerHTML = items + items + items; // Triplicar para efecto más fluido
+                    
+                    // Ajustar velocidad según clase
+                    const totalWidth = track.scrollWidth / 3;
+                    let speed;
+                    
+                    if (track.classList.contains('marquee-slow')) {
+                        speed = totalWidth / 40; // 40 segundos para completar
+                    } else if (track.classList.contains('marquee-fast')) {
+                        speed = totalWidth / 60; // 60 segundos para completar
+                    } else {
+                        speed = totalWidth / 50; // 50 segundos para completar
+                    }
+                    
+                    track.style.animationDuration = speed + 's';
+                });
+            }
+            
+            setupMarquee();
+            
+            // Pausar marquee al hacer hover
+            const marqueeItems = document.querySelectorAll('.marquee-item');
+            marqueeItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const track = this.closest('.marquee-track');
+                    track.style.animationPlayState = 'paused';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    const track = this.closest('.marquee-track');
+                    track.style.animationPlayState = 'running';
+                });
+            });
+            
+            // Efecto de brillo al pasar el mouse
+            marqueeItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.filter = 'brightness(1.1) saturate(1.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.filter = 'brightness(1) saturate(1)';
+                });
+            });
+            
+            // Configurar imágenes de fondo
+            function setupBackgroundImages() {
+                // Para el header
+                const header = document.querySelector('.custom-header-bg');
+                if (header) {
+                    header.style.setProperty('--header-image', 'url("img/contact.jpg")');
+                }
+                
+                // Para el CTA
+                const cta = document.querySelector('.cta-bg');
+                if (cta) {
+                    cta.style.setProperty('--cta-image', 'url("img/contact.jpg")');
+                }
+            }
+            
+            setupBackgroundImages();
+        });
+    </script>
 </body>
 
 </html>

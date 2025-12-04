@@ -24,6 +24,46 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        /* Estilos para el header con animaciones */
+        .custom-header-bg {
+            background: linear-gradient(rgba(33, 30, 28, 0.7), rgba(33, 30, 28, 0.7)), var(--header-image) no-repeat center center;
+            background-size: cover;
+            --header-image: url('img/contact.jpg');
+        }
+        
+        /* Animaciones para fade-in */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Efectos hover para cards */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(33, 30, 28, 0.15);
+        }
+        
+        /* Efecto para iconos */
+        .icon-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .icon-hover:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+    </style>
 </head>
 
 <body>
@@ -52,7 +92,6 @@
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
@@ -67,10 +106,10 @@
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
                     <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
                     <div class="nav-item dropdown">
-                        <a href="catalogo.html" class="nav-link dropdown-toggle">Catálogo</a>
+                        <a href="catalogo.html" class="nav-link">Catálogo</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="postres.html" class="dropdown-item">Postres</a>
-                            <a href="Tortas&Pies.html" class="dropdown-item">Tortas & Pies</a>
+                            <a href="tortas.html" class="dropdown-item">Tortas & Pies</a>
                             <a href="cheesecakes.html" class="dropdown-item">Cheesecakes</a>
                             <a href="salados.html" class="dropdown-item">Salados</a>
                             <a href="cuchareables.html" class="dropdown-item">Cuchareables & Bandejas</a>
@@ -85,19 +124,13 @@
     </div>
     <!-- Navbar End -->
 
-
-    <!-- Header Start -->
+    <!-- Header Start CON MISMAS ANIMACIONES QUE ABOUT.HTML -->
     <div class="container-fluid p-0">
-        <div class="jumbotron jumbotron-fluid position-relative" 
-            style="background: linear-gradient(rgba(33, 30, 28, 0.7), rgba(33, 40, 28, 0.7)), 
-            url('img/contact.jpg') no-repeat center center; 
-            background-size: cover; 
-            min-height: 320px;
-            margin-bottom: 10px;
-            padding-bottom: 0;">
-            <div class="container text-center py-5">
-                <h3 class="text-white display-3 mb-4">Contáctanos</h3>
-                <div class="d-inline-flex align-items-center text-white">
+        <div class="jumbotron jumbotron-fluid position-relative overflow-hidden custom-header-bg" 
+            style="min-height: 400px; margin-bottom: 90px;">
+            <div class="container text-center py-5 position-relative" style="z-index: 2;">
+                <h3 class="text-white display-3 mb-4 animate__animated animate__fadeInDown animate__delay-0.5s">Contáctanos</h3>
+                <div class="d-inline-flex align-items-center text-white animate__animated animate__fadeInUp animate__delay-1s">
                     <p class="m-0"><a class="text-white" href="index.html">Inicio</a></p>
                     <i class="far fa-circle px-3"></i>
                     <p class="m-0">Contáctanos</p>
@@ -107,48 +140,71 @@
     </div>
     <!-- Header End -->
 
-
-
     <!-- Contact Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h6 class="d-inline-block bg-light text-primary text-uppercase py-1 px-2">Estamos aquí para ti</h6>
-                    <h1 class="mb-4">¿Listo para endulzar tu día?</h1>
-                    <p class="mb-5">Contáctanos directamente por WhatsApp para realizar tu pedido o consultar sobre nuestros productos. También puedes seguirnos en Instagram para ver nuestras últimas creaciones.</p>
+                    <h6 class="d-inline-block bg-light text-primary text-uppercase py-1 px-2 fade-in-up">Estamos aquí para ti</h6>
+                    <h1 class="mb-4 fade-in-up" style="transition-delay: 0.2s;">¿Listo para endulzar tu día?</h1>
+                    <p class="mb-5 fade-in-up" style="transition-delay: 0.3s;">Contáctanos directamente por WhatsApp para realizar tu pedido o consultar sobre nuestros productos. También puedes seguirnos en Instagram para ver nuestras últimas creaciones.</p>
                     
                     <div class="row justify-content-center">
                         <div class="col-md-6 mb-4">
-                            <div class="card border-0 shadow-sm h-100">
+                            <div class="card border-0 shadow-sm h-100 hover-lift fade-in-up" style="transition-delay: 0.4s;">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fab fa-whatsapp fa-3x text-primary mb-3"></i>
+                                        <div class="icon-hover">
+                                            <i class="fab fa-whatsapp fa-3x text-primary mb-3"></i>
+                                        </div>
                                         <h4 class="card-title">WhatsApp</h4>
                                         <p class="card-text">Haz tu pedido directamente o consulta sobre disponibilidad y precios.</p>
                                     </div>
-                                    <a href="https://wa.me/51986556921" target="_blank" class="btn btn-primary btn-lg" style="font-size: 0.9rem; white-space: nowrap;">Escribir por WhatsApp</a>
+                                    <a href="https://wa.me/51986556921" target="_blank" class="btn btn-primary btn-lg" 
+                                       style="font-size: 0.9rem; white-space: nowrap;">
+                                        Escribir por WhatsApp
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
-                            <div class="card border-0 shadow-sm h-100">
+                            <div class="card border-0 shadow-sm h-100 hover-lift fade-in-up" style="transition-delay: 0.5s;">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fab fa-instagram fa-3x text-primary mb-3"></i>
+                                        <div class="icon-hover">
+                                            <i class="fab fa-instagram fa-3x text-primary mb-3"></i>
+                                        </div>
                                         <h4 class="card-title">Instagram</h4>
                                         <p class="card-text">Síguenos para ver nuestras últimas creaciones y promociones especiales.</p>
                                     </div>
-                                    <a href="https://instagram.com/usuario" target="_blank" class="btn btn-primary btn-lg" style="font-size: 0.9rem; white-space: nowrap;">Seguir en Instagram</a>
+                                    <a href="https://instagram.com/usuario" target="_blank" class="btn btn-primary btn-lg" 
+                                       style="font-size: 0.9rem; white-space: nowrap;">
+                                        Seguir en Instagram
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-5">
+                    <div class="mt-5 fade-in-up" style="transition-delay: 0.6s;">
                         <h5 class="mb-3">Información de contacto</h5>
                         <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
                         <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    </div>
+                    
+                    <!-- Sección adicional con animación -->
+                    <div class="row mt-5 fade-in-up" style="transition-delay: 0.7s;">
+                        <div class="col-md-12">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="text-primary mb-3">💡 ¿Necesitas ayuda para elegir?</h5>
+                                    <p class="mb-0">
+                                        ¿No sabes qué postre elegir? ¡Te ayudamos! Compártenos la ocasión especial 
+                                        (cumpleaños, aniversario, reunión familiar) y te recomendaremos la opción perfecta.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,29 +212,28 @@
     </div>
     <!-- Contact End -->
 
-
     <!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
         <div class="container pt-5">
             <div class="row">
-                <div class="col-lg-6 pr-lg-5 mb-5">
+                <div class="col-lg-6 pr-lg-5 mb-5 fade-in-up">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="mb-3 text-white"><span class="text-primary">Dolce</span></h1>
+                        <h1 class="mb-3 text-white"><span class="text-primary">Postres D'Katherine</span></h1>
                     </a>
-                    <p>Postres artesanales hechos con amor ❤️.  
+                    <p class="text-white-50">Postres artesanales hechos con amor ❤️.  
                     Especialista en tartaletas, cheesecakes, cupcakes y kekes caseros.
                     Usamos ingredientes frescos y naturales para asegurar el mejor sabor en cada pedido.</p>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
-                    <p><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
+                    <p class="text-white-50"><i class="fa fa-map-marker-alt mr-2"></i>Lima, Perú</p>
+                    <p class="text-white-50"><i class="fa fa-phone-alt mr-2"></i>+51 986 556 921</p>
                     <div class="d-flex justify-content-start mt-4">
-                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square" href="https://wa.me/51986556921"><i class="fab fa-whatsapp"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2 icon-hover" href="https://facebook.com/usuario"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square mr-2 icon-hover" href="https://instagram.com/usuario"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square icon-hover" href="https://wa.me/51986556921"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 pl-lg-5">
                     <div class="row">
-                        <div class="col-sm-6 mb-5">
+                        <div class="col-sm-6 mb-5 fade-in-up" style="transition-delay: 0.2s;">
                             <h5 class="text-white text-uppercase mb-4">Enlaces</h5>
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
@@ -193,12 +248,13 @@
             </div>
         </div>
     </div>
+    
     <div class="container-fluid bg-dark text-light border-top py-4" style="border-color: rgba(256, 256, 256, .15) !important;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                     <p class="m-0 text-white">
-                        &copy; 2025 <a href="#" class="text-primary">Dolce</a>. Todos los derechos reservados.
+                        &copy; 2025 <a href="#" class="text-primary">Postres D'Katherine</a>. Todos los derechos reservados.
                     </p>
                 </div>
             </div>
@@ -206,10 +262,8 @@
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -221,6 +275,73 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        // Animaciones al hacer scroll (igual que en about.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto fade-in al hacer scroll
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            // Ejecutar al cargar y al hacer scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll();
+            
+            // Configurar imagen de fondo del header
+            function setupHeaderBackground() {
+                const header = document.querySelector('.custom-header-bg');
+                if (header) {
+                    // Ya está configurada en el CSS con var(--header-image)
+                    // Puedes cambiarla aquí si quieres
+                    // header.style.setProperty('--header-image', 'url("img/contact.jpg")');
+                }
+            }
+            
+            setupHeaderBackground();
+            
+            // Efectos hover para los iconos de contacto
+            const contactIcons = document.querySelectorAll('.card i.fa-3x');
+            contactIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+            
+            // Efecto de onda para los botones
+            const buttons = document.querySelectorAll('.btn-primary');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 10px 25px rgba(249, 163, 146, 0.3)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '0 5px 15px rgba(249, 163, 146, 0.2)';
+                });
+                
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
